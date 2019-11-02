@@ -1,0 +1,153 @@
+/**
+ * List of changes
+ */
+
+2.5.0 - xx-xx-2019
+• Added repeater field
+• Fixed fields render on admin
+
+2.4.1 - 07-24-2019
+• Added forms import/export
+• Added fields number on the admin
+• Fixed phone field to accept international phone number
+• Fixed input reveal
+
+2.4.0 - 06-18-2019
+• Added shortcode to button label
+• Added button field
+• Added ft_submit and ft_submit_form filters
+• Fixed roles and capabilities
+• Fixed message field
+• Fixed slash with multiple values on the admin
+• Fixed response for select field
+• Fixed icon on the admin
+• Fixed hour field
+
+2.3.6 - 01-28-2019
+• Added filter to hide fields
+• Added filter to add attributes to fields
+
+2.3.5 - 01-02-2019
+• Added Bootstrap classes
+• Added email body filter
+• Fixed file extension
+• Fixed ft_values filter
+• Updated name generation
+
+2.3.4 - 12-20-2018
+• Fixed email validation
+
+2.3.3 - 11-30-2018
+• Fixed role capabilities
+
+2.3.2 - 10-12-2018
+• Added message field
+• Added ft_label filter
+• Added checkbox maximum option
+• Fixed multiple values loading
+
+2.3.1 - 09-26-2018
+• Modified form settings presentation
+• Fixed file field
+
+2.3.0 - 09-12-2018
+• Added time field
+• Added color field
+• Modified form rendering on the admin
+• Fixed scripts loading on frontend
+
+2.2.2 - 09-05-2018
+• Added notification if forms recipients are not set or still in dev
+• Added address field
+• Added help message option
+• Fixed conditional logic for radios and checkboxes
+• Modified column size option
+• Updated name generation
+
+2.2.1 - 08-01-2018
+• Added recipient column on forms list
+• Added actions column on forms list
+• Added settings link under plugin
+
+2.2.0 - 07-25-2018
+• Added action to resend the response from the admin
+• Added action to mark the response as read on the admin
+• Added to, ccs, object, from name and from email filters to be able to change the values
+• Added function to get form meta
+• Added response sorting for name and email
+• Added HTML tag option on scrolling settings
+• Fixed time in the footer of response
+• Fixed label on file input
+• Fixed smooth scrolling
+• Fixed automatic reply
+• Modified radio and checkbox render
+• Modified ft_dump function
+• Removed view link
+• Removed front-end stylesheet
+
+2.1.5 - 05-15-2018
+• Added option to export responses
+• Fixed confirmation page link
+
+2.1.4 - 05-08-2018
+• Added option to duplicate forms
+• Added toolbar links
+• Added wp_mail error log
+• Fixed file validation when not visible
+• Fixed autofill
+• Removed edit and quick edit links
+
+2.1.3 - 04-30-2018
+• Added default SMTP options
+• Modified success hook
+• Fixed role capabilities
+• Fixed options
+• Fixed jQuery validation
+
+2.1.2 - 04-18-2018
+• Added the date the form was sent on the email
+• Attachments are linked directly to upload directory
+• Fixed file field
+• Fixed PHP validation
+• Removed "Edit response" title on the admin
+
+2.1.1 - 04-10-2018
+• Compatibility PHP 5.3
+
+2.1.0 - 04-06-2018
+• New settings page
+• Added option to scroll to form when sended
+• Added version on the dashboard widget
+• Removed set default timezone
+
+2.0.6 - 03-27-2018
+• Added option to change SMTP Encryption
+
+2.0.5 - 02-27-2018
+• Updated jQuery validate
+• Change jQuery to $ for validator
+• Don't allow the view of response taxonomy on the frontend
+• Adjustment of counter for responses
+
+2.0.4 - 01-31-2018
+• Send a copy of the email
+
+2.0.3 - 01-24-2018
+• Added conditional logic to fields with multiple values
+• Added support for thickbox
+• Adjustment of the multiple values
+• Adjustment of validation
+• Support to add custom values to field with multiple values
+
+2.0.2 - 01-12-2018
+• Added fieldset field
+• Adjustment of the field's required state on backend
+
+2.0.1 - 12-27-2017
+• Allow values to be overwritten in PHP for every fields
+• Adjustment of the file field
+• Don't show files icon in responses sidebar on the admin if there's no file
+• Change form action
+
+2.0.0 - 12-22-2017
+• Official release
