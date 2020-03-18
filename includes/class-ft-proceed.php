@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.5.0
+ * @version 2.5.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -871,12 +871,13 @@ class FT_Proceed {
 					$mc_email = wp_unslash( sanitize_email( $_POST[ $mc_email_key ] ) );
 					$mc_fname = ! empty( $mc_fname_key ) ? wp_unslash( sanitize_text_field( $_POST[ $mc_fname_key ] ) ) : '';
 					$mc_lname = ! empty( $mc_lname_key ) ? wp_unslash( sanitize_text_field( $_POST[ $mc_lname_key ] ) ) : '';
+					$mc_lang  = ft_language_code();
 
 					include_once( 'class-ft-mailchimp.php' );
 
 					$mailchimp = new FT_Mailchimp( $api_key );
 
-					$result = $mailchimp->post( "lists/$list_id/members", array( 'email_address' => $mc_email, 'status' => $opt_in, 'merge_fields' => array( 'FNAME' => $mc_fname, 'LNAME' => $mc_lname ) ) );
+					$result = $mailchimp->post( "lists/$list_id/members", array( 'email_address' => $mc_email, 'status' => $opt_in, 'language' => $mc_lang, 'merge_fields' => array( 'FNAME' => $mc_fname, 'LNAME' => $mc_lname ) ) );
 
 					if ( $mailchimp->success() ) {
 						self::send( $form_id );

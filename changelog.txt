@@ -2,8 +2,12 @@
  * List of changes
  */
 
-2.5.0 - xx-xx-2019
-• Added repeater field
+2.5.1 - 03-18-2020
+• Added language to mailchimp subscription
+
+2.5.0 - 11-01-2019
+• * Added repeater field
+• Added restrictions to address field
 • Fixed fields render on admin
 
 2.4.1 - 07-24-2019

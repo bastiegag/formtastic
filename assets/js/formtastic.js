@@ -3916,9 +3916,9 @@ return $;
                 $( '.ft-input--address' ).each( function() {
                     var options  = {
                             // type: ['(cities'],
-                            componentRestrictions: {
-                                country: 'ca'
-                            }
+                            // componentRestrictions: {
+                            //     country: 'ca'
+                            // }
                         },
                         input    = document.getElementById( $( this ).attr( 'id' ) ),
                         autocomplete = new google.maps.places.Autocomplete( input, options);

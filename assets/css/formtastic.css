@@ -214,9 +214,11 @@
 	font-weight: normal;
 }
 
-.ft-input {
-	height: 28px;
+.ft-input,
+.wp-admin select.ft-input {
+	height: 30px;
 	width: 100%;
+	max-width: 100%;
 }
 
 .ft-textarea {

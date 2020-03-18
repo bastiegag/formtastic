@@ -164,12 +164,12 @@ if ( empty( $formtastic ) ) {
 				
 				<div class="ft-field<?php echo $confirmation !== 'inline' ? ' ft-hidden' : ''; ?>" data-tab="inline">
 					<label for="success_msg"><?php _e( 'Success message', 'formtastic' ); ?> :</label>
-					<textarea name="formtastic[settings][success_msg]" id="success_msg" class="widefat" rows="1"><?php echo ( ! empty( $formtastic['settings']['success_msg'] ) ) ? esc_textarea( $formtastic['settings']['success_msg'] ) : ''; ?></textarea>
+					<textarea name="formtastic[settings][success_msg]" id="success_msg" class="widefat" rows="2"><?php echo ( ! empty( $formtastic['settings']['success_msg'] ) ) ? esc_textarea( $formtastic['settings']['success_msg'] ) : ''; ?></textarea>
 				</div>
 
 				<div class="ft-field">
 					<label for="error_msg"><?php _e( 'Error message', 'formtastic' ); ?> :</label>
-					<textarea name="formtastic[settings][error_msg]" id="error_msg" class="widefat" rows="1"><?php echo ( ! empty( $formtastic['settings']['error_msg'] ) ) ? esc_textarea( $formtastic['settings']['error_msg'] ) : ''; ?></textarea>
+					<textarea name="formtastic[settings][error_msg]" id="error_msg" class="widefat" rows="2"><?php echo ( ! empty( $formtastic['settings']['error_msg'] ) ) ? esc_textarea( $formtastic['settings']['error_msg'] ) : ''; ?></textarea>
 				</div>
 			</div>
 		</div>
