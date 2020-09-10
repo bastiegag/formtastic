@@ -2,11 +2,22 @@
  * List of changes
  */
 
+2.6.0 - 09-10-2020
+• Fixed style on the admin
+• Fixed javascript warning
+• Fixed php mailer debug
+• Fixed email header
+• Fixed email sender to be smtp username if set
+• Fixed resend function
+• Added information to get where the email come from
+• Added Canadian french language
+• Updated gulp
+• Removed export
+
 2.5.1 - 03-18-2020
 • Added language to mailchimp subscription
 
 2.5.0 - 11-01-2019
-• * Added repeater field
 • Added restrictions to address field
 • Fixed fields render on admin
 

@@ -10,6 +10,7 @@ var gulp  = require( 'gulp' ),
 	concat = require( 'gulp-concat' ),
 	jshint = require( 'gulp-jshint' ),
 	uglify = require( 'gulp-uglify' ),
+	terser = require( 'gulp-terser' ),
 
 	// Others
 	util	  = require( 'gulp-util' ),
@@ -78,7 +79,7 @@ function js_back() {
 				.pipe( jshint.reporter( 'default' ) )
 				.pipe( concat( 'formtastic-admin.js' ) )
 				.pipe( gulp.dest( 'assets/js' ) )
-				.pipe( uglify() )
+				.pipe( terser() )
 				.on( 'error', function( err ) { 
 					util.log( util.colors.red( '[Error]' ), err.toString() ); 
 				} )
@@ -92,7 +93,7 @@ function js_front() {
 				.pipe( jshint.reporter( 'default' ) )
 				.pipe( concat( 'formtastic.js' ) )
 				.pipe( gulp.dest( 'assets/js' ) )
-				.pipe( uglify() )
+				.pipe( terser() )
 				.on( 'error', function( err ) { 
 					util.log( util.colors.red( '[Error]' ), err.toString() ); 
 				} )

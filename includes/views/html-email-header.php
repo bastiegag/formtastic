@@ -4,7 +4,7 @@
  * 
  * @author  Sébastien Gagné
  * @package Formtastic/Views
- * @version 2.1.3
+ * @version 2.6.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -30,8 +30,10 @@ $options = get_option( 'ft_customize' );
 									$img = wp_get_attachment_image_src( $options['logo'], 'medium' );
 									$src = $img[0];
 
-									echo sprintf( '<p style="margin-top: 0; margin-bottom: 20px;"><img src="%s" /></p>',
-										esc_url( $src )
+									echo sprintf( '<p style="margin-top: 0; margin-bottom: 20px; max-width: %s;"><img src="%s" style="width: %s;" /></p>',
+										'200px',
+										esc_url( $src ),
+										'100%'
 									);
 								}
 

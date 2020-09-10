@@ -1310,7 +1310,7 @@
 		},
 
 		getReadableContrastingColor: function( bgColor, minContrast ) {
-			if ( ! bgColor instanceof Color ) {
+			if ( ! ( bgColor instanceof Color ) ) {
 				return this;
 			}
 

@@ -1,0 +1,650 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-04-12 09:12-0400\n"
+"PO-Revision-Date: 2017-04-12 09:13-0400\n"
+"Last-Translator: Sébastien Gagné\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_FR\n"
+
+msgid "Plugin to create forms easily, it's formtastic!"
+msgstr "Une extension pour créer facilement des formulaires, c'est formtastic!"
+
+msgid "Checkbox"
+msgstr "Case à cocher"
+
+msgid "This form was sent from"
+msgstr "Ce formulaire a été envoyé de"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Date and time"
+msgstr "Date et heure"
+
+msgid "Email"
+msgstr "Courriel"
+
+msgid "File"
+msgstr "Fichier"
+
+msgid "Color"
+msgstr "Couleur"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Number"
+msgstr "Nombre"
+
+msgid "Password"
+msgstr "Mot de passe"
+
+msgid "Show all forms"
+msgstr "Tous les formulaires"
+
+msgid "Search"
+msgstr "Recherche"
+
+msgid "Postal code"
+msgstr "Code postal"
+
+msgid "Address"
+msgstr "Adresse"
+
+msgid "Radio"
+msgstr "Bouton radio"
+
+msgid "Select"
+msgstr "Liste déroulante"
+
+msgid "Phone"
+msgstr "Téléphone"
+
+msgid "Text"
+msgstr "Texte"
+
+msgid "Html"
+msgstr "Html"
+
+msgid "Upload"
+msgstr "Téléverser"
+
+msgid "Repeat"
+msgstr "Répéter"
+
+msgid "Textarea"
+msgstr "Zone de texte"
+
+msgid "Activate dev mode to overwrite all email."
+msgstr "Activer le mode dev pour écraser tous les courriels."
+
+msgid "Super dev mode"
+msgstr "Super dev mode"
+
+msgid "Use the super dev mode"
+msgstr "Utiliser le super dev mode"
+
+msgid "Url"
+msgstr "Url"
+
+msgid "Row"
+msgstr "Rangée"
+
+msgid "Range"
+msgstr "Portée"
+
+msgid "Button"
+msgstr "Bouton"
+
+msgid "Repeater"
+msgstr "Répéteur"
+
+msgid "Time"
+msgstr "Heure"
+
+msgid "Fieldset"
+msgstr "Groupe de champs"
+
+msgid "Edit"
+msgstr "Modifier"
+
+msgid "Duplicate"
+msgstr "Dupliquer"
+
+msgid "Duplicate this form"
+msgstr "Dupliquer ce formulaire"
+
+msgid "Remove"
+msgstr "Supprimer"
+
+msgid "Sent from the form"
+msgstr "Envoyé depuis le formulaire"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Label"
+msgstr "Étiquette"
+
+msgid "Placeholder"
+msgstr ""
+
+msgid "Error message"
+msgstr "Message d'erreur"
+
+msgid "Help message"
+msgstr "Message d'aide"
+
+msgid "Error, nonce is not valid"
+msgstr "Erreur, le nonce n'est pas valide"
+
+msgid "Success message"
+msgstr "Message de succès"
+
+msgid "Rows"
+msgstr "Rangées"
+
+msgid "Size (kb)"
+msgstr "Taille du fichier (ko)"
+
+msgid "Minimum"
+msgstr "Minimum"
+
+msgid "Maximum"
+msgstr "Maximum"
+
+msgid "Extension"
+msgstr "Extension"
+
+msgid "Site key"
+msgstr "Clé du site"
+
+msgid "Secret key"
+msgstr "Clé secrète"
+
+msgid "Separated by"
+msgstr "Séparé par"
+
+msgid "Multiple choice"
+msgstr "Choix multiple"
+
+msgid "Step"
+msgstr "Incrémentation"
+
+msgid "Value"
+msgstr "Valeur"
+
+msgid "Field"
+msgstr "Champ"
+
+msgid "Conditional logic"
+msgstr "Logique conditionnelle"
+
+msgid "Equal to"
+msgstr "Est égal à"
+
+msgid "Not equal to"
+msgstr "N'est pas égal à"
+
+msgid "Value(s)"
+msgstr "Valeur(s)"
+
+msgid "Required"
+msgstr "Obligatoire"
+
+msgid "Save"
+msgstr "Sauvegarder"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Hidden"
+msgstr "Caché"
+
+msgid "Start from"
+msgstr "À partir du"
+
+msgid "Select options to export formtastic responses."
+msgstr "Choisir les options pour exporter les réponses de formtastic."
+
+msgid "Until"
+msgstr "Jusqu'au"
+
+msgid "To"
+msgstr "À"
+
+msgid "Cc"
+msgstr "Cc"
+
+msgid "Auto reply"
+msgstr "Réponse automatique"
+
+msgid "Send auto reply"
+msgstr "Envoyer une réponse automatique"
+
+msgid "Auto reply message"
+msgstr "Message de la réponse automatique"
+
+msgid "Redirection page"
+msgstr "Page de redirection"
+
+msgid "Username/Email"
+msgstr "Nom d'utilisateur/Courriel"
+
+msgid "Send by email"
+msgstr "Envoyé par courriel"
+
+msgid "Save a copy on Wordpress"
+msgstr "Sauvegarder une copie sur Wordpress"
+
+msgid "Row class(es)"
+msgstr "Class(es) des rangées"
+
+msgid "Column class(es)"
+msgstr "Class(es) des colonnes"
+
+msgid "Button label"
+msgstr "Étiquette du bouton"
+
+msgid "Button class(es)"
+msgstr "Class(es) du bouton"
+
+msgid "Class(es)"
+msgstr "Class(es)"
+
+msgid "Column size"
+msgstr "Largeur de colonne"
+
+msgid "Object"
+msgstr "Objet"
+
+msgid "From name"
+msgstr "Nom de l'expéditeur"
+
+msgid "From email"
+msgstr "Courriel de l'expéditeur"
+
+msgid "Confirmation"
+msgstr "Confirmation"
+
+msgid "Inline"
+msgstr "Inline"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "Manual"
+msgstr "Manuelle"
+
+msgid "Taxonomy"
+msgstr "Taxonomie"
+
+msgid "Recipient"
+msgstr "Destinataire"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Double Opt-In"
+msgstr "Double Opt-In"
+
+msgid "Post type"
+msgstr "Type de publication"
+
+msgid "Submit"
+msgstr "Envoyer"
+
+msgid "Your message has been sent."
+msgstr "Votre message a été envoyé."
+
+msgid "An error has occurred, please check the field(s) again."
+msgstr "Une erreur est survenue, vérifiez le(s) champ(s) de nouveau."
+
+msgid "Confirmation page"
+msgstr "Page de confirmation"
+
+msgid "Confirmation message"
+msgstr "Message de confirmation"
+
+msgid "General"
+msgstr "Général"
+
+msgid "General options"
+msgstr "Options générales"
+
+msgid "Settings"
+msgstr "Réglages"
+
+msgid "Fields"
+msgstr "Champs"
+
+msgid "Shortcode"
+msgstr "Shortcode"
+
+msgid "Form builder"
+msgstr "Créateur de formulaire"
+
+msgid "Information"
+msgstr "Information"
+
+msgid "Add"
+msgstr "Ajouter"
+
+msgid "Add form"
+msgstr "Ajouter formulaire"
+
+msgid "Add new form"
+msgstr "Ajouter nouveau formulaire"
+
+msgid "All forms"
+msgstr "Tous les formulaires"
+
+msgid "Edit form"
+msgstr "Modifier formulaire"
+
+msgid "Formtastic"
+msgstr "Formtastic"
+
+msgid "New form"
+msgstr "Nouveau formulaire"
+
+msgid "No form found"
+msgstr "Aucun formulaire trouvé"
+
+msgid "No form found in trash"
+msgstr "Aucun formulaire trouvé dans la corbeille"
+
+msgid "Parent form"
+msgstr "Formulaire parent"
+
+msgid "Search forms"
+msgstr "Rechercher un formulaire"
+
+msgid "View form"
+msgstr "Voir formulaire"
+
+msgid "Add response"
+msgstr "Ajouter réponse"
+
+msgid "Add new response"
+msgstr "Ajouter nouvelle réponse"
+
+msgid "All responses"
+msgstr "Toutes les réponses"
+
+msgid "Edit response"
+msgstr "Modifier réponse"
+
+msgid "Responses"
+msgstr "Réponses"
+
+msgid "New response"
+msgstr "Nouvelle réponse"
+
+msgid "No response found"
+msgstr "Aucune réponse trouvée"
+
+msgid "No response found in trash"
+msgstr "Aucune réponse trouvée dans la corbeille"
+
+msgid "Parent response"
+msgstr "Réponse parente"
+
+msgid "Search responses"
+msgstr "Rechercher une réponse"
+
+msgid "Response"
+msgstr "Réponse"
+
+msgid "View response"
+msgstr "Voir réponse"
+
+msgid "Form"
+msgstr "Formulaire"
+
+msgid "Forms"
+msgstr "Formulaires"
+
+msgid "form"
+msgstr "formulaire"
+
+msgid "Mark as read"
+msgstr "Marquer comme lu"
+
+msgid "Unread"
+msgstr "Non lu"
+
+msgid "This field is required"
+msgstr "Ce champ est obligatoire"
+
+msgid "This field is not valid"
+msgstr "Ce champ n'est pas valide"
+
+msgid "Formtastic export"
+msgstr "Exportation Formtastic"
+
+msgid "Export"
+msgstr "Exportation"
+
+msgid "Formtastic settings"
+msgstr "Réglages de Formtastic"
+
+msgid "Enter your SMTP information below."
+msgstr "Entrez vos informations SMTP ci-dessous."
+
+msgid "Set the logo and color on email template."
+msgstr "Définissez le logo et la couleur sur le modèle de courriel."
+
+msgid "Customize"
+msgstr "Personnaliser"
+
+msgid "Use SMTP"
+msgstr "Utiliser SMTP"
+
+msgid "Host"
+msgstr "Hôte"
+
+msgid "Port"
+msgstr "Port"
+
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+msgid "Form :"
+msgstr "Formulaire :"
+
+msgid "Form : <strong>%s</strong>"
+msgid_plural "Forms : <strong>%s</strong>"
+msgstr[0] "Formulaire : <strong>%s</strong>"
+msgstr[1] "Formulaires : <strong>%s</strong>"
+
+msgid "Response :"
+msgstr "Réponse :"
+
+msgid "Response : <strong>%s</strong>"
+msgid_plural "Responses : <strong>%s</strong>"
+msgstr[0] "Réponse : <strong>%s</strong>"
+msgstr[1] "Réponses : <strong>%s</strong>"
+
+msgid "You have no unread response."
+msgstr "Vous n'avez aucune réponse non lue."
+
+msgid "You have <strong>%s</strong> unread response."
+msgid_plural "You have <strong>%s</strong> unread responses."
+msgstr[0] "Vous avez <strong>%s</strong> réponse non lu."
+msgstr[1] "Vous avez <strong>%s</strong> réponses non lues."
+
+msgid "View all responses"
+msgstr "Voir toutes les réponses"
+
+msgid "Delete response"
+msgstr "Supprimer la réponse"
+
+msgid "Email address is already subscribed to the list."
+msgstr "L'adresse courriel est déjà inscrite à la liste."
+
+msgid "API key"
+msgstr "Clé API"
+
+msgid "List ID"
+msgstr "ID de la liste"
+
+msgid "First name"
+msgstr "Prénom"
+
+msgid "Last name"
+msgstr "Nom"
+
+msgid "Autofill the form"
+msgstr "Remplir automatiquement le formulaire"
+
+msgid "Display a form"
+msgstr "Affiche un formulaire"
+
+msgid "Title:"
+msgstr "Titre:"
+
+msgid "Please check the captcha form."
+msgstr "Veuillez cocher le formulaire captcha."
+
+msgid "You are a robot, access denied!"
+msgstr "Vous êtes un robot, accès refusé!"
+
+msgid "Use captcha"
+msgstr "Utiliser un captcha"
+
+msgid "Subscribe to mailchimp"
+msgstr "Inscrire sur mailchimp"
+
+msgid "Button icon"
+msgstr "Icône du bouton"
+
+msgid "Required fields markup"
+msgstr "Marquage des champs requis"
+
+msgid "Optional fields markup"
+msgstr "Marquage des champs optionnels"
+
+msgid "Copy"
+msgstr "Copie"
+
+msgid "Send copy"
+msgstr "Envoyer une copie"
+
+msgid "None"
+msgstr "Aucun"
+
+msgid "TLS"
+msgstr "TLS"
+
+msgid "SSL"
+msgstr "SSL"
+
+msgid "Encryption"
+msgstr "Chiffrement"
+
+msgid "Scrolling"
+msgstr "Défilement"
+
+msgid "Smooth scrolling"
+msgstr "Défilement lisse"
+
+msgid "Speed"
+msgstr "Vitesse"
+
+msgid "Use the smooth scrolling"
+msgstr "Utiliser le défilement lisse"
+
+msgid "Activate smooth scrolling to smoothly scroll to the form when sended."
+msgstr "Activer le défilement lisse pour faire défiler jusqu'au formulaire en douceur une fois envoyé."
+
+msgid "Minimum role to access plugin options."
+msgstr "Rôle minimum pour accéder aux options de l'extension."
+
+msgid "Role"
+msgstr "Rôle"
+
+msgid "Create forms"
+msgstr "Créer des formulaires"
+
+msgid "Read responses"
+msgstr "Lire les réponses"
+
+msgid "Send on"
+msgstr "Envoyé le"
+
+msgid "January"
+msgstr "janvier"
+
+msgid "February"
+msgstr "février"
+
+msgid "March"
+msgstr "mars"
+
+msgid "April"
+msgstr "avril"
+
+msgid "May"
+msgstr "mai"
+
+msgid "June"
+msgstr "juin"
+
+msgid "July"
+msgstr "juillet"
+
+msgid "August"
+msgstr "août"
+
+msgid "September"
+msgstr "septembre"
+
+msgid "October"
+msgstr "octobre"
+
+msgid "November"
+msgstr "novembre"
+
+msgid "December"
+msgstr "décembre"
+
+msgid "File type is not valid"
+msgstr "Le type de fichier n'est pas valide"
+
+msgid "File size is too large"
+msgstr "Le taille du fichier est trop grande"
+
+msgid "Subscriber"
+msgstr "Abonné"
+
+msgid "Contributor"
+msgstr "Contributeur"
+
+msgid "Author"
+msgstr "Auteur"
+
+msgid "Editor"
+msgstr "Éditeur"
+
+msgid "Administrator"
+msgstr "Administrateur"
+
+msgid "Resend"
+msgstr "Renvoyer"
+
+msgid "Offset"
+msgstr "Décalage"
+
+msgid "HTML tag"
+msgstr "Balise HTML"
+
+msgid "Some of your forms recipients are not set or are still in dev."
+msgstr "Certains destinataires de vos formulaires ne sont pas définis ou sont encore en développement."

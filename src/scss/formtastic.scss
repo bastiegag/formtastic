@@ -2,7 +2,7 @@
 	background-color: #f1f1f1;
 }
 
-#formtastic_builder_meta_box .hndle {
+#formtastic_builder_meta_box .postbox-header {
 	background-color: #fff;
 }
 
@@ -154,7 +154,7 @@
 	background-color: inherit;
 	cursor: default;
 	display: none;
-	padding: 5px;
+	padding: 4px 2px;
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -311,7 +311,7 @@
 	z-index: 26;
 }
 
-#formtastic_dashboard_widget .hndle {
+#formtastic_dashboard_widget .postbox-header {
 	-webkit-box-shadow: inset 0 -2px 0 #fff, inset 0 2px 0 #fff, inset -2px 0 0 #fff, inset 2px 0 0 #fff;
 	background: -webkit-repeating-linear-gradient(135deg, rgba(88, 90, 132, 0.05) 0px, rgba(88, 90, 132, 0.05) 20px, #fff 20px, #fff 40px, rgba(253, 125, 122, 0.05) 40px, rgba(253, 125, 122, 0.05) 60px, #fff 60px, #fff 80px);
 	background: repeating-linear-gradient(-45deg, rgba(88, 90, 132, 0.05) 0px, rgba(88, 90, 132, 0.05) 20px, #fff 20px, #fff 40px, rgba(253, 125, 122, 0.05) 40px, rgba(253, 125, 122, 0.05) 60px, #fff 60px, #fff 80px);
@@ -572,7 +572,7 @@
 	background-color: #f1f1f1;
 }
 
-#formtastic_fields_meta_box .hndle {
+#formtastic_fields_meta_box .postbox-header {
 	background-color: #fff;
 }
 
@@ -783,8 +783,7 @@
 	margin-top: -20px;
 }
 
-#ft_response_meta_box .handlediv,
-#ft_response_meta_box .hndle {
+#ft_response_meta_box .postbox-header {
 	display: none;
 }
 

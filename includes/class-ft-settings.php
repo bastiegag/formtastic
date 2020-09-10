@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.2.2
+ * @version 2.6.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -64,7 +64,7 @@ class FT_Settings {
 			$submenu[ $menu ] = array(
 				$submenu[ $menu ][5],
 				$submenu[ $menu ][10],
-				$submenu[ $menu ][13],
+				// $submenu[ $menu ][13],
 				$submenu[ $menu ][12],
 				$submenu[ $menu ][11]
 			);

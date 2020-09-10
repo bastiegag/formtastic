@@ -115,8 +115,6 @@
             });
 
             if ( $( '.ft-input--date' ).length ) {
-                $.datepicker.regional[ ft.lang_code ];
-
                 $( '.ft-input--date' ).each( function() {
                     var me     = $( this ),
                         min    = me.attr( 'data-min' ),
@@ -134,7 +132,7 @@
                         maxDate: max,
                         changeMonth: false,
                         changeYear: false
-                    });
+                    }, $.datepicker.regional[ ft.lang_code ]);
                 });
             }
 

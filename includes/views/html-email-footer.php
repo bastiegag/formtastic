@@ -4,7 +4,7 @@
  * 
  * @author  Sébastien Gagné
  * @package Formtastic/Views
- * @version 2.1.3
+ * @version 2.6.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -51,7 +51,7 @@ $options = get_option( 'ft_customize' );
 							</tr>
 						</table>
 						<div>
-							<p style="text-align: center; font-family: Verdana, Geneva, sans-serif; color: #999999; margin: 0; line-height: 30px; font-size: 11px;"><?php echo __( 'This form was sent from', 'formtastic' ) . ' ' . get_bloginfo( 'name' ) . ' - Formtastic ' . $version; ?></p>
+							<p style="text-align: center; font-family: Verdana, Geneva, sans-serif; color: #999999; margin: 0; line-height: 30px; font-size: 11px;"><?php echo __( 'This form was sent from', 'formtastic' ) . ' <a href="' . get_bloginfo( 'url' ) . '">' . get_bloginfo( 'name' ) . '</a> - Formtastic ' . $version; ?></p>
 						</div>
 					</td>
 				</tr>

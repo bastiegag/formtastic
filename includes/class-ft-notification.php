@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.3.3
+ * @version 2.6.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -46,7 +46,7 @@ class FT_Notification {
 
 	    $m = false;
 	    if ( current_user_can( 'update_core' ) ) {
-	    	$m = 13;
+	    	$m = 12;
 
 	    } else if ( current_user_can( 'publish_pages' ) ) {
 	    	$m = 0;

@@ -3,7 +3,7 @@
  * Plugin Name: Formtastic
  * Plugin URI: http://formtastic.sebastiengagne.ca/
  * Description: Plugin to create forms easily, it's formtastic!
- * Version: 2.5.1
+ * Version: 2.6.0
  * Author: Sébastien Gagné
  * Author URI: http://sebastiengagne.ca/
  *
@@ -19,9 +19,6 @@ $dummy_desc = __( 'Plugin to create forms easily, it\'s formtastic!', 'formtasti
 
 /**
  * Formtastic Class
- *
- * @class Formtastic
- * @version	2.5.1
  */
 class Formtastic {
 
@@ -38,7 +35,7 @@ class Formtastic {
 		include_once( 'includes/class-ft-post-types.php' );
 		include_once( 'includes/class-ft-meta-boxes.php' );
 		include_once( 'includes/class-ft-settings.php' );
-		include_once( 'includes/class-ft-export.php' );
+		// include_once( 'includes/class-ft-export.php' );
 		include_once( 'includes/class-ft-form.php' );
 		include_once( 'includes/class-ft-proceed.php' );
 		include_once( 'includes/class-ft-ajax.php' );
@@ -69,7 +66,7 @@ class Formtastic {
 	 * Plugin version
 	 */
 	public static function version() {
-	    return '2.5.1';
+	    return '2.6.0';
 	}
 
 	/** 

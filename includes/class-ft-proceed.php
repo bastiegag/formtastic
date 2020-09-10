@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.5.1
+ * @version 2.6.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -357,8 +357,21 @@ class FT_Proceed {
 				/**
 				 * From email
 				 */
-				$from_email = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );
+				$smtp = get_option( 'ft_smtp' );
+
+				if ( isset( $smtp['use'] ) ) {
+					$from_email = ft_get_value( $smtp['username'], $settings['from_email'], 'email' );
+
+					if ( empty( $from_email ) ) {
+						$from_email = array( get_bloginfo( 'admin_email' ) );
+					}
+
+				} else {
+					$from_email = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );
+				}
+				
 				$from_email = apply_filters( 'ft_from_email', $from_email[0] );
+				$from_real  = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );
 
 				add_filter( 'wp_mail_from', function( $email ) {
 					global $from_email;
@@ -551,7 +564,7 @@ class FT_Proceed {
 							$form = array(
 								'content'    => $body,
 								'form'       => get_the_title( $form_id ),
-								'from_email' => $from_email,
+								'from_email' => $from_real[0],
 								'from_name'  => $from_name,
 								'title'      => $object,
 								'array'		 => json_encode( $array )
@@ -674,7 +687,21 @@ class FT_Proceed {
 		/**
 		 * From email
 		 */
-		$from_email = get_post_meta( $response_id, 'ft_email', true );
+		$smtp = get_option( 'ft_smtp' );
+
+		if ( isset( $smtp['use'] ) ) {
+			$from_email = ft_get_value( $smtp['username'], $settings['from_email'], 'email' );
+
+			if ( empty( $from_email ) ) {
+				$from_email = array( get_bloginfo( 'admin_email' ) );
+			}
+
+		} else {
+			$from_email = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );
+		}
+		
+		$from_email = apply_filters( 'ft_from_email', $from_email[0] );
+		// $from_email = get_post_meta( $response_id, 'ft_email', true );
 
 		add_filter( 'wp_mail_from', function( $email ) {
 			global $from_email;
