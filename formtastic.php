@@ -91,22 +91,6 @@ class Formtastic {
 	}
 
 	/**
-	 * Activity log
-	 */
-	public static function log( $error ) {
-	    $upload     = wp_upload_dir();
-	    $upload_dir = $upload['basedir'] . '/ft-logs/';
-
-	    $data = date( 'Y-m-d H:i:s' ) . ' | ' . json_encode( $error ) . "\r";
-
-	    file_put_contents( 
-	    	$upload_dir . 'ft-log.txt', 
-	    	$data, 
-	    	FILE_APPEND
-	    );
-	}
-
-	/**
 	 * Create uploads directory
 	 */
 	private static function create_directory() {
@@ -117,12 +101,7 @@ class Formtastic {
 				'base'    => $upload_dir['basedir'] . '/formtastic_uploads',
 				'file'    => 'index.html',
 				'content' => '',
-			),
-			array(
-				'base'    => $upload_dir['basedir'] . '/ft-logs',
-				'file'    => 'index.html',
-				'content' => '',
-			),
+			)
 		);
 
 		foreach ( $files as $file ) {
