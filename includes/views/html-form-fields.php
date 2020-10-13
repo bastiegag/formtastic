@@ -4,7 +4,7 @@
  * 
  * @author  Sébastien Gagné
  * @package Formtastic/Views
- * @version 2.4.2
+ * @version 2.6.1
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -33,17 +33,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'range'    => __( 'Range', 'formtastic' ),
 			'color'    => __( 'Color', 'formtastic' ),
 			'file'     => __( 'File', 'formtastic' ),
-			'button'   => __( 'Button', 'formtastic' ),
 			'hidden'   => __( 'Hidden', 'formtastic' ),
 			'row'      => __( 'Row', 'formtastic' ),
 			'message'  => __( 'Message', 'formtastic' ),
-			'repeater' => __( 'Repeater', 'formtastic' ),
+			'button'   => __( 'Send button', 'formtastic' )
 		);
 
 		foreach ( $fields as $key => $value ) {
-			echo sprintf( '<li><a href="#" title="%1$s" class="ft-create-field" data-field="%s">' . ft_icon( '%1$s', false ) . '<span>%2$s</span></a></li>',
+			echo sprintf( '<li><a href="#" title="%s" class="ft-create-field" data-field="%s">%s<span>%1$s</span></a></li>',
+				$value,
 				$key,
-				$value
+				$key !== 'button' ? ft_icon( $key, false ) : '',
 			);
 		} 
 	?>

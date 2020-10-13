@@ -2,6 +2,10 @@
  * List of changes
  */
 
+2.6.1 - 10-13-2020
+• Fixed exclude from search
+• Added send button field
+
 2.6.0 - 09-10-2020
 • Fixed style on the admin
 • Fixed javascript warning

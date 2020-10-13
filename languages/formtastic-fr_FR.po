@@ -640,6 +640,9 @@ msgstr "Administrateur"
 msgid "Resend"
 msgstr "Renvoyer"
 
+msgid "Send button"
+msgstr "Bouton envoyer"
+
 msgid "Offset"
 msgstr "Décalage"
 

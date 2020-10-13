@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.5.0
+ * @version 2.6.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -295,7 +295,7 @@ if ( ! function_exists( 'ft_field_name' ) ) {
 	function ft_field_name( $type ) {
 		$field = array(
 			'address'  => __( 'Address', 'formtastic' ),
-			'button'   => __( 'Button', 'formtastic' ),
+			'button'   => __( 'Send button', 'formtastic' ),
 			'checkbox' => __( 'Checkbox', 'formtastic' ),
 			'color'    => __( 'Couleur', 'formtastic' ),
 			'date'     => __( 'Date', 'formtastic' ),

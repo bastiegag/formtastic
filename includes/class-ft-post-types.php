@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.4.1
+ * @version 2.6.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -69,7 +69,7 @@ class FT_Post_types {
 					'publish_posts'      => 'manage_options',
 					'read_private_posts' => 'manage_options'
 				),
-				'exclude_from_search' => false,
+				'exclude_from_search' => true,
 				'has_archive'         => false,
 				'hierarchical'        => false,
 				'menu_icon'           => 'dashicons-email-alt',

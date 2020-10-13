@@ -37,12 +37,17 @@ class FT_Form_Widget extends WP_Widget {
 
 	public function widget( $args, $instance ) {
 		$title = apply_filters( 'widget_title', $instance['title'] );
+		$text  = apply_filters( 'widget_text', $instance['text'] );
 		$form  = $instance['form'];
 
 		echo $args['before_widget'];
 		
 		if ( ! empty( $title ) ) {
 			echo $args['before_title'] . $title . $args['after_title'];
+		}
+
+		if ( ! empty( $text ) ) {
+			echo '<p>' . $text . '</p>';
 		}
 
 		echo do_shortcode( '[formtastic id="' . $form . '"]' );
@@ -52,6 +57,7 @@ class FT_Form_Widget extends WP_Widget {
 		
 	public function form( $instance ) {
 		$title = isset( $instance['title'] ) ? $instance['title'] : '';
+		$text  = isset( $instance['text'] ) ? $instance['text'] : '';
 		$form  = isset( $instance['form'] ) ? $instance['form'] : '';
 
 		echo sprintf( '<p><label for="%s">%s</label><input class="widefat" id="%1$s" name="%s" type="text" value="%s" /></p>',
@@ -59,6 +65,14 @@ class FT_Form_Widget extends WP_Widget {
 			__( 'Title', 'formtastic' ) . ' :',
 			$this->get_field_name( 'title' ),
 			esc_attr( $title )
+		);
+
+
+		echo sprintf( '<p><label for="%s">%s</label><input class="widefat" id="%1$s" name="%s" type="text" value="%s" /></p>',
+			$this->get_field_id( 'text' ),
+			__( 'Text', 'formtastic' ) . ' :',
+			$this->get_field_name( 'text' ),
+			esc_attr( $text )
 		);
 
 		$args = array(
@@ -97,6 +111,7 @@ class FT_Form_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance          = array();
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance['text']  = ( ! empty( $new_instance['text'] ) ) ? strip_tags( $new_instance['text'] ) : '';
 		$instance['form']  = ( ! empty( $new_instance['form'] ) ) ? strip_tags( $new_instance['form'] ) : '';
 
 		return $instance;

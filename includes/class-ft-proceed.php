@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.0
+ * @version 2.6.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -96,7 +96,7 @@ class FT_Proceed {
 				'checkbox' => "#^(.*)#i",
 				'file'     => "#^(.*)#i",
 				'hidden'   => "#^(.*)#i",
-				'repeater' => "#^(.*)#i",
+				'button'   => "#^(.*)#i",
 			);
 
 			$fields = ft_get_fields( $form_id );

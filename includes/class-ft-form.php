@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.5.0
+ * @version 2.6.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -41,6 +41,8 @@ class FT_Form {
 		 * Send button
 		 */
 		$icon = ! empty( $settings['button_icon'] ) ? apply_filters( 'ft_icon', esc_attr( $settings['button_icon'] ) ) : '';
+
+		$has_submit = false;
 
 		$submit = sprintf( '<div class="ft-field ft-field--submit"><button type="submit" name="submit-%s" class="ft-button ft-button--submit%s">%s%s</button></div>',
 			$form_id,
@@ -96,10 +98,15 @@ class FT_Form {
 		foreach ( $fields as $field ) {
 			$children = array();
 			$data = json_decode( $field );
+			$btn = false;
 
 			foreach ( $data as $key => $value ) {
 				if ( $value->name == 'id' ) {
 					$field_id = esc_html( $value->value );
+				}
+
+				if ( $value->name == 'type' && $value->value == 'button' ) {
+					$btn = true;
 				}
 
 				if ( $value->name == 'fields' ) {
@@ -113,6 +120,13 @@ class FT_Form {
 			}
 
 			if ( ! in_array( $field_id, $hidden ) ) {
+				if ( $btn && $has_submit ) {
+					continue;
+
+				} else if ( $btn && ! $has_submit ) {
+					$has_submit = true;
+				}
+
 				$form .= self::render_field( $data, $form_id, $children, $submit );
 			}
 		}
@@ -128,7 +142,9 @@ class FT_Form {
 			);
 		}
 
-		$form .= apply_filters( 'ft_submit_form', $submit, $form_id );
+		if ( ! $has_submit ) {
+			$form .= apply_filters( 'ft_submit_form', $submit, $form_id );
+		}
 
 		/**
 		 * Autofill
@@ -290,8 +306,9 @@ class FT_Form {
 				break;
 
 			case 'button' :
-				$input = sprintf( '<button id="%s" type="button" class="ft-button button %s">%s</button>',
+				$input = sprintf( '<button id="%s" type="submit" name="submit-%s" class="ft-button ft-button--submit %s">%s</button>',
 					$id,
+					$form_id,
 					$btn_class,
 					$btn_label
 				);
@@ -339,7 +356,7 @@ class FT_Form {
 				break;
 
 			case 'color' :
-				$input = sprintf( '<input type="text" value="%s" id="%s" name="%2$s" class="ft-input ft-input--%s form-control" data-msg="%s"%s%s><div class="ft-color"></div>',
+				$input = sprintf( '<div class="ft-color-holder"><input type="text" value="%s" id="%s" name="%2$s" class="ft-input ft-input--%s form-control" data-msg="%s"%s%s><div class="ft-color"></div></div>',
 					isset( $_POST[ $id ] ) ? wp_unslash( esc_html( $_POST[ $id ] ) ) : apply_filters( 'ft_value', $value, $id ),
 					$id,
 					$type,
