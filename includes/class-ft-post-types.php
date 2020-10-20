@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.1
+ * @version 2.6.3
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -155,9 +155,9 @@ class FT_Post_types {
 					'singular_name'     => __( 'Form', 'formtastic' ),
 					'update_item'       => __( 'Update form', 'formtastic' ),
 				),
-				'public'            => false,
+				'public'            => true,
 				'query_var'         => true,
-				'show_admin_column' => false,
+				'show_admin_column' => true,
 				'show_in_nav_menus' => false,
 				'show_ui'           => false,
 			)
@@ -186,7 +186,7 @@ class FT_Post_types {
 					foreach ( $terms as $term ) { 
 						echo sprintf( '<option value="%s"%s>%s (%s)</option>',
 							$term->slug,
-							$_GET[ $tax_slug ] == $term->slug ? ' selected="selected"' : '',
+							isset( $_GET[ $tax_slug ] ) && $_GET[ $tax_slug ] == $term->slug ? ' selected="selected"' : '',
 							get_the_title( (int)$term->slug ),
 							$term->count
 						);
