@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.1
+ * @version 2.6.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -357,18 +357,9 @@ class FT_Proceed {
 				/**
 				 * From email
 				 */
-				$smtp = get_option( 'ft_smtp' );
 
-				if ( isset( $smtp['use'] ) ) {
-					$from_email = ft_get_value( $smtp['username'], $settings['from_email'], 'email' );
-
-					if ( empty( $from_email ) ) {
-						$from_email = array( get_bloginfo( 'admin_email' ) );
-					}
-
-				} else {
-					$from_email = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );
-				}
+				// $from_email = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );
+				$from_email = array( 'noreply@bravad.ca' );
 				
 				$from_email = apply_filters( 'ft_from_email', $from_email[0] );
 				$from_real  = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );

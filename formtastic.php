@@ -3,7 +3,7 @@
  * Plugin Name: Formtastic
  * Plugin URI: http://formtastic.sebastiengagne.ca/
  * Description: Plugin to create forms easily, it's formtastic!
- * Version: 2.6.1
+ * Version: 2.6.2
  * Author: Sébastien Gagné
  * Author URI: http://sebastiengagne.ca/
  *
@@ -66,7 +66,7 @@ class Formtastic {
 	 * Plugin version
 	 */
 	public static function version() {
-	    return '2.6.1';
+	    return '2.6.2';
 	}
 
 	/** 
@@ -74,10 +74,10 @@ class Formtastic {
 	 */
 	public static function smtp( $key = 'host' ) {
 		$arr = array(
-			'host'     => 'mail.bravad-pop.com',
-			'port'     => '8081',
-			'username' => 'dev@bravad-pop.com',
-			'password' => 'zUg969yY@xwvirkM'
+			'host'     => 'smtp.sendgrid.net',
+			'port'     => '587',
+			'username' => 'apikey',
+			'password' => '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'
 		);
 
 	    return $arr[ $key ];

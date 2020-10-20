@@ -2,6 +2,10 @@
  * List of changes
  */
 
+ 2.6.2 - 10-20-2020
+ • Fixed email sender
+ • Updated SMTP defaults settings
+
 2.6.1 - 10-13-2020
 • Fixed exclude from search
 • Added send button field
