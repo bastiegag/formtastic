@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.3
+ * @version 2.6.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -157,7 +157,7 @@ class FT_Post_types {
 				),
 				'public'            => true,
 				'query_var'         => true,
-				'show_admin_column' => true,
+				'show_admin_column' => false,
 				'show_in_nav_menus' => false,
 				'show_ui'           => false,
 			)

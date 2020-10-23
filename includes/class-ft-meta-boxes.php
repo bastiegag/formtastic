@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.3
+ * @version 2.6.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -202,18 +202,15 @@ class FT_Meta_boxes {
 
 		if ( is_array( $values ) ) {
 			for ( $i = 0; $i < count( $values ); $i++ ) {
-				$html .= '<div class="ft-values-field">';
-				$html .= sprintf( '<div class="ft-handle">%s</div>', ft_icon( 'sort' ) );
-				$html .= sprintf( '<div class="ft-cell"><input type="radio" value="%s" name="selection" class="ft-values ft-input"%s %s></div>', 
-					wp_unslash( $values[ $i ] ), 
-					$selection == $values[ $i ] ? ' data-prev="true"' : '',
-					! empty( $values[ $i ] ) ? checked( $selection, $values[ $i ], false ) : ''
-				);
-				$html .= sprintf( '<div class="ft-cell"><input type="text" value="%s" name="values" class="ft-values ft-input"></div>', wp_unslash( $values[ $i ] ) );
-				$html .= sprintf( '<div class="ft-link">%s</div>', ft_icon( 'link' ) );
-				$html .= sprintf( '<div class="ft-cell ft-conditions"><input type="text" value="%s" name="conditions" class="ft-values ft-input"></div>', $conditions[ $i ] );
-				$html .= sprintf( '<div class="ft-substract-value">%s</div>', ft_icon( 'minus' ) );
-				$html .= '</div>';
+				$html .= self::render_value( $values[ $i ], $conditions[ $i ], $selection );
+			}
+
+		} else {
+			if ( is_array( $conditions ) ) {
+				$html .= self::render_value( $values, $conditions[0], $selection );
+
+			} else {
+				$html .= self::render_value( $values, $conditions, $selection );
 			}
 		}
 
@@ -222,6 +219,23 @@ class FT_Meta_boxes {
 				'html' => $html
         	)
         );
+	}
+
+	public function render_value( $values, $conditions, $selection ) {
+		$html = '<div class="ft-values-field">';
+		$html .= sprintf( '<div class="ft-handle">%s</div>', ft_icon( 'sort' ) );
+		$html .= sprintf( '<div class="ft-cell"><input type="radio" value="%s" name="selection" class="ft-values ft-input"%s %s></div>', 
+			wp_unslash( $values ), 
+			$selection == $values ? ' data-prev="true"' : '',
+			! empty( $values ) ? checked( $selection, $values, false ) : ''
+		);
+		$html .= sprintf( '<div class="ft-cell"><input type="text" value="%s" name="values" class="ft-values ft-input"></div>', wp_unslash( $values ) );
+		$html .= sprintf( '<div class="ft-link">%s</div>', ft_icon( 'link' ) );
+		$html .= sprintf( '<div class="ft-cell ft-conditions"><input type="text" value="%s" name="conditions" class="ft-values ft-input"></div>', $conditions );
+		$html .= sprintf( '<div class="ft-substract-value">%s</div>', ft_icon( 'minus' ) );
+		$html .= '</div>';
+
+		return $html;
 	}
 
 	/** 
