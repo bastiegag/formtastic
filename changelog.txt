@@ -2,6 +2,9 @@
  * List of changes
  */
 
+2.6.5 - 10-23-2020
+• Added form import/export
+
 2.6.4 - 10-23-2020
 • Fixed multiple values
 • Hide taxonomy column on response table

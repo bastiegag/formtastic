@@ -431,7 +431,7 @@ msgid "Formtastic export"
 msgstr "Exportation Formtastic"
 
 msgid "Export"
-msgstr "Exportation"
+msgstr "Exporter"
 
 msgid "Formtastic settings"
 msgstr "Réglages de Formtastic"
