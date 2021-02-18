@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.4
+ * @version 2.6.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -64,6 +64,17 @@ class FT_Meta_boxes {
 				'default' 
 			);
 
+			if ( get_post_status( get_the_ID() ) == 'publish' ) {
+				add_meta_box( 
+					'formtastic_import_meta_box', 
+					__( 'Import', 'formtastic' ), 
+					array( $this, 'build_formtastic_import_meta_box' ), 
+					'formtastic', 
+					'side', 
+					'default' 
+				);
+			}
+
 			add_meta_box( 
 				'formtastic_builder_meta_box', 
 				__( 'Form builder', 'formtastic' ), 
@@ -117,6 +128,16 @@ class FT_Meta_boxes {
 	public function build_formtastic_shortcode_meta_box( $post ) {
 		echo sprintf( '<input type="text" value="[formtastic id=&quot;%s&quot;]" id="ft-shortcode" class="ft-input ft-autoselect" readonly>',
 			$post->ID
+		);
+	}
+
+	/**
+	 * Build import meta box
+	 */
+	public function build_formtastic_import_meta_box( $post ) {
+		echo sprintf( '<p><input type="file" value="" id="ft-import-form" class="ft-input" /></p><a href="#" class="button button-primary ft-import" data-form="%s">%s</a>',
+			$post->ID,
+			__( 'Import form', 'bravad' )
 		);
 	}
 

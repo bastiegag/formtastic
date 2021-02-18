@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.4
+ * @version 2.6.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -208,10 +208,10 @@ class FT_Post_types {
 
 	    foreach ( $columns as $key => $title ) {
 	        if ( $key == 'date' ) {
-				$new_columns['fields'] = __( 'Fields', 'formtastic' );
 				$new_columns['recipient'] = __( 'Recipient', 'formtastic' );
 				$new_columns['shortcode'] = __( 'Shortcode', 'formtastic' );
-	        	$new_columns['actions']   = __( 'Actions', 'formtastic' );
+				$new_columns['fields']    = __( 'Fields', 'formtastic' );
+				$new_columns['actions']   = __( 'Actions', 'formtastic' );
 	        }
 
 	        $new_columns[ $key ] = $title;

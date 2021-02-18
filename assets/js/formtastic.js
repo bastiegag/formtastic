@@ -3814,12 +3814,24 @@ return $;
                             .closest( '.ft-field' )
                             .addClass( errorClass )
                             .removeClass( validClass );
+
+                        if ( typeof pageScroll !== 'undefined' ) {
+                            setTimeout( function() {
+                                pageScroll.setSize();
+                            }, 300);
+                        }
                     },
                     unhighlight: function( element, errorClass, validClass ) {
                         $( element )
                             .closest( '.ft-field' )
                             .removeClass( errorClass )
                             .addClass( validClass );
+
+                        if ( typeof pageScroll !== 'undefined' ) {
+                            setTimeout( function() {
+                                pageScroll.setSize();
+                            }, 300);
+                        }
                     },
                     errorPlacement: function( error, element ) {
                         error.appendTo( element.closest( '.ft-field' ) );

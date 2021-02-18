@@ -4,7 +4,7 @@
  * 
  * @author  Sébastien Gagné
  * @package Formtastic/Views
- * @version 2.6.1
+ * @version 2.6.6
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			echo sprintf( '<li><a href="#" title="%s" class="ft-create-field" data-field="%s">%s<span>%1$s</span></a></li>',
 				$value,
 				$key,
-				$key !== 'button' ? ft_icon( $key, false ) : '',
+				$key !== 'button' ? ft_icon( $key, false ) : ''
 			);
 		} 
 	?>
