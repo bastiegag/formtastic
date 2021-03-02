@@ -432,7 +432,6 @@
                 controls = controls.split( ',' );
 
                 for ( var i = 0; i < controls.length; i++ ) {
-                    // console.log( controls[i] );
                     $( '#ft-' + controls[i] + '-field' )
                         .show()
                         .addClass( 'ft-active' );
@@ -470,7 +469,7 @@
                                 input.val( data[j].value );
 
                             } else if ( input.is( 'textarea' ) ) {
-                                input.text( data[j].value );
+                                input.val( data[j].value );
 
                             } else {
                                 switch ( input.attr( 'type' ) ) {
@@ -742,6 +741,8 @@
                 field.each( function() {
                     switch ( $( this ).attr( 'type' ) ) {
                         case 'text' :
+                        case 'number' :
+                        case undefined :
                             $( this ).val( '' );
                             break;
 
