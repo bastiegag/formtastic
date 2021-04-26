@@ -594,6 +594,34 @@
 
                 return false;
             });
+
+            $( '#ft_response_form' ).on( 'change', function() {
+                var me = $( this );
+
+                if ( me.val() == '' ) {
+                    $( '#ft-export-response' )
+                        .attr( 'href', '#' )
+                        .attr( 'disabled', true );
+
+                } else {
+                    $( '#ft-export-response' )
+                        .attr( 'href', 'admin.php?action=export_responses&form=' + me.val() )
+                        .attr( 'disabled', false );
+                }
+            });
         }
+
+        $( window ).on( 'load', function() {
+            if ( $( '#ft_response_form' ).val() == '' ) {
+                $( '#ft-export-response' )
+                    .attr( 'href', '#' )
+                    .attr( 'disabled', true );
+
+            } else {
+                $( '#ft-export-response' )
+                    .attr( 'href', 'admin.php?action=export_responses&form=' + $( '#ft_response_form' ).val() )
+                    .attr( 'disabled', false );
+            }
+        });
 
 }(jQuery));

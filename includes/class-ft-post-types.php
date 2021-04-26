@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.5
+ * @version 2.6.9
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -60,14 +60,14 @@ class FT_Post_types {
 					'view_item'          => __( 'View form', 'formtastic' ),
 				),
 				'capabilities' 		  => array(
-					'edit_post'          => 'manage_options',
+					'edit_post'          => 'publish_pages',
 					'read_post'          => 'publish_pages',
-					'delete_post'        => 'manage_options',
-					'edit_posts'         => 'manage_options',
-					'edit_others_posts'  => 'manage_options',
-					'delete_posts'       => 'manage_options',
-					'publish_posts'      => 'manage_options',
-					'read_private_posts' => 'manage_options'
+					'delete_post'        => 'publish_pages',
+					'edit_posts'         => 'publish_pages',
+					'edit_others_posts'  => 'publish_pages',
+					'delete_posts'       => 'publish_pages',
+					'publish_posts'      => 'publish_pages',
+					'read_private_posts' => 'publish_pages'
 				),
 				'exclude_from_search' => true,
 				'has_archive'         => false,
@@ -86,7 +86,8 @@ class FT_Post_types {
 			)
 		);
 
-		if ( current_user_can( 'manage_options' ) ) {
+		// if ( current_user_can( 'manage_options' ) ) {
+		if ( current_user_can( 'publish_pages' ) ) {
 			$label = __( 'Responses', 'formtastic' );
 			$menu  = 'edit.php?post_type=formtastic';
 

@@ -2,6 +2,13 @@
  * List of changes
  */
 
+2.6.9 - 04-26-2021
+• Added response export
+• Fixed css on admin
+• Fixed role capabilities
+• Removed SMTP options
+• Removed classes options
+
 2.6.8 - 03-02-2021
 • Fixed message field
 

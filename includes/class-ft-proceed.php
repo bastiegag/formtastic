@@ -979,6 +979,7 @@ class FT_Proceed {
 
 				wp_set_object_terms( $post_id, $form_id, 'ft_response_form' );
 
+				update_post_meta( $post_id, 'ft_json', $form['array'] );
 				update_post_meta( $post_id, 'ft_name', $form['from_name'] );
 				update_post_meta( $post_id, 'ft_email', $form['from_email'] );
 				update_post_meta( $post_id, 'ft_form_id', $form_id );
