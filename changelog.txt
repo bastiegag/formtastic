@@ -2,6 +2,10 @@
  * List of changes
  */
 
+2.7.0 - 05-21-2021
+• Added honeypot field
+• Updated to ReCaptcha v3
+
 2.6.9 - 04-26-2021
 • Added response export
 • Fixed css on admin

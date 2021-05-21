@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.3.0
+ * @version 2.7.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -34,6 +34,7 @@ class FT_Register {
 
 		$plugin_url = Formtastic::plugin_url();
 		$version    = Formtastic::version();
+		$options    = get_option( 'ft_general' );
 		
 		wp_enqueue_style( 'wp-color-picker' );
 
@@ -50,12 +51,17 @@ class FT_Register {
 			'lang_code'  => ft_language_code()
 		);
 
-		wp_localize_script( 'formtastic', 'ft', $vars );
-
 		/**
 		 * Captcha
 		 */
-		wp_register_script( 'formtastic-captcha', '//www.google.com/recaptcha/api.js?hl=' . ft_language_code(), array(), '2.0.0', false );
+		if ( isset( $options['use_captcha'] ) && $options['use_captcha'] == 'yes' ) {
+			$vars['site_key']    = $options['site_key'];
+			$vars['use_captcha'] = $options['use_captcha'];
+
+			wp_enqueue_script( 'formtastic-captcha', '//www.google.com/recaptcha/api.js?render=' . $options['site_key'], array( 'jquery' ), '3.0.0', true );
+		}
+
+		wp_localize_script( 'formtastic', 'ft', $vars );
 	}
 
 	/**
@@ -123,13 +129,6 @@ class FT_Register {
 		$settings   = $formtastic['settings'];
 
 		if ( get_post_type( $id ) == 'formtastic' ) {
-			/**
-			 * Enqueue captcha script if active
-			 */
-			if ( isset( $settings['use_captcha'] ) && $settings['use_captcha'] == 'yes' ) {
-				wp_enqueue_script( 'formtastic-captcha' );
-			}
-
 			return FT_Form::build( $id );
 		}
 	}

@@ -517,6 +517,9 @@ msgstr "Veuillez cocher le formulaire captcha."
 msgid "You are a robot, access denied!"
 msgstr "Vous êtes un robot, accès refusé!"
 
+msgid "No secret key for ReCaptcha"
+msgstr "Aucune clé secrète pour ReCpatcha"
+
 msgid "Use captcha"
 msgstr "Utiliser un captcha"
 

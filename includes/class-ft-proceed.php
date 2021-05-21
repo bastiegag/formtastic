@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.2
+ * @version 2.7.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -64,9 +64,13 @@ class FT_Proceed {
 
 		$formtastic = get_post_meta( $form_id, 'formtastic', true );
 		$settings   = $formtastic['settings'];
+		$options    = get_option( 'ft_general' );
 
 		if ( ! wp_verify_nonce( $_REQUEST[ $nonce ], 'formtastic_proceed' ) ) :
 			self::confirmation( false, __( 'Error, nonce is not valid', 'formtastic' ) );
+
+		elseif ( ! empty( $_POST['firstname'] ) ) :
+			self::confirmation( false, __( 'You are a robot, access denied!', 'formtastic' ) );
 		
 		else :
 
@@ -122,7 +126,7 @@ class FT_Proceed {
 
 			$is_valid = true;
 
-			if ( isset( $_POST['submit-' . $form_id] ) ) {
+			if ( isset( $_POST['formtastic-' . $form_id] ) ) {
 				$msg = '';
 
 				/**
@@ -210,25 +214,37 @@ class FT_Proceed {
 					}
 				}
 
-				if ( isset( $settings['use_captcha'] ) && $settings['use_captcha'] == 'yes' ) {
-					if ( isset( $_POST['g-recaptcha-response'] ) ) {
+				if ( isset( $options['use_captcha'] ) && $options['use_captcha'] == 'yes' ) {
+					if ( empty( $options['site_key'] ) ) {
+						$is_valid = false;
+						$msg      = __( 'No site key for ReCaptcha', 'formtastic' );
+
+					} else if ( isset( $_POST['g-recaptcha-response'] ) ) {
 						$captcha = $_POST['g-recaptcha-response'];
 
 						if ( ! $captcha ) {
 							$is_valid = false;
-							$msg      = __( 'Please check the captcha form.', 'formtastic' );
+							$msg      = __( 'You are a robot, access denied!', 'formtastic' );
+
+						} else if ( empty( $options['secret_key'] ) ) {
+							$is_valid = false;
+							$msg      = __( 'No secret key for ReCaptcha', 'formtastic' );
 
 						} else {
-							$secret_key    = $settings['captcha_secret_key'];
+							$secret_key    = $options['secret_key'];
 							$ip            = $_SERVER['REMOTE_ADDR'];
 							$response      = file_get_contents( 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secret_key . '&response=' . $captcha . '&remoteip=' . $ip );
 							$response_keys = json_decode( $response, true );
 
-							if ( intval( $response_keys['success'] ) !== 1 ) {
+							if ( ! $response_keys['success'] ) {
 								$is_valid = false;
 								$msg      = __( 'You are a robot, access denied!', 'formtastic' );
 							}
 						}
+
+					} else {
+						$is_valid = false;
+						$msg      = __( 'You are a robot, access denied!', 'formtastic' );
 					}
 				}
 			}
@@ -296,7 +312,7 @@ class FT_Proceed {
 
 		else :
 
-			if ( isset( $_POST['submit-' . $form_id] ) ) {
+			if ( isset( $_POST['formtastic-' . $form_id] ) ) {
 				global $from_name, $from_email, $keys;
 
 				$formtastic = get_post_meta( $form_id, 'formtastic', true );
@@ -358,8 +374,8 @@ class FT_Proceed {
 				 * From email
 				 */
 
-				// $from_email = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );
-				$from_email = array( 'noreply@bravad.ca' );
+				$from_email = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );
+				// $from_email = array( 'noreply@bravad.ca' );
 				
 				$from_email = apply_filters( 'ft_from_email', $from_email[0] );
 				$from_real  = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );

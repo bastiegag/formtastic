@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.1
+ * @version 2.7.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -44,11 +44,10 @@ class FT_Form {
 
 		$has_submit = false;
 
-		$submit = sprintf( '<div class="ft-field ft-field--submit"><button type="submit" name="submit-%s" class="ft-button ft-button--submit%s">%s%s</button></div>',
+		$submit = sprintf( '<div class="ft-field ft-field--submit"><input type="submit" name="submit-%s" class="ft-button ft-button--submit%s" value="%s" /></div>',
 			$form_id,
 			! empty( $settings['button_classes'] ) ? ' ' . esc_attr( $settings['button_classes'] ) : ' btn btn-dark',
-			! empty( $settings['button_label'] ) ? do_shortcode( $settings['button_label'] ) : esc_html__( 'Submit', 'formtastic' ),
-			! empty( $icon ) ? $icon : ''
+			! empty( $settings['button_label'] ) ? do_shortcode( $settings['button_label'] ) : esc_html__( 'Submit', 'formtastic' )
 		);
 
 		/**
@@ -88,6 +87,11 @@ class FT_Form {
 		$nonce = 'formtastic-' . $form_id;
 		$form .= wp_nonce_field( 'formtastic_proceed', $nonce, true, false );
 		$form .= '<input type="hidden" name="formtastic" value="' . $form_id . '">';
+		$form .= '<input type="hidden" name="firstname" value="">';
+
+		if ( isset( $options['use_captcha'] ) && $options['use_captcha'] == 'yes' ) {
+			$form .= '<input type="hidden" name="g-recaptcha-response" value="0">';
+		}
 
 		$form .= sprintf( '<div class="ft-row%s">', 
 			! empty( $options['class_row'] ) ? ' ' . esc_attr( $options['class_row'] ) : ' row'
@@ -134,13 +138,13 @@ class FT_Form {
 		$form .= '</div>';
 
 		/**
-		 * Captcha
+		 * ReCaptcha v2
 		 */
-		if ( isset( $settings['use_captcha'] ) && $settings['use_captcha'] == 'yes' ) {
-			$form .= sprintf( '<div class="ft-field ft-field--captcha"><div class="g-recaptcha" data-sitekey="%s"></div></div>',
-				$settings['captcha_site_key']
-			);
-		}
+		// if ( isset( $settings['use_captcha'] ) && $settings['use_captcha'] == 'yes' ) {
+		// 	$form .= sprintf( '<div class="ft-field ft-field--captcha"><div class="g-recaptcha" data-sitekey="%s"></div></div>',
+		// 		$settings['captcha_site_key']
+		// 	);
+		// }
 
 		if ( ! $has_submit ) {
 			$form .= apply_filters( 'ft_submit_form', $submit, $form_id );

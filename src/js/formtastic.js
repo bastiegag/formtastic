@@ -52,8 +52,22 @@
             }
 
             $( '.ft-validate' ).on( 'submit', function() {
-                if ( ! $( this ).valid() ) {
+                var form = $( this );
+                
+                if ( ! form.valid() ) {
                     return false;
+                }
+
+                if ( typeof ft.use_captcha !== 'undefined' && ft.use_captcha == 'yes' && typeof ft.site_key !== 'undefined' && ft.site_key !== '' ) {
+                    event.preventDefault();
+                    
+                    grecaptcha.ready( function() {
+                        grecaptcha.execute( ft.site_key, { action: 'submit' } ).then( function( token ) {
+                            form.find( 'input[name="g-recaptcha-response"]' ).val( token );
+
+                            form.submit();
+                        });
+                    });
                 }
             });
 

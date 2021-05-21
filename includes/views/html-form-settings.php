@@ -4,7 +4,7 @@
  * 
  * @author  Sébastien Gagné
  * @package Formtastic/Views
- * @version 2.6.2
+ * @version 2.7.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -25,7 +25,6 @@ if ( empty( $formtastic ) ) {
 		<li><a href="#ft-tab-confirmation"><?php _e( 'Confirmation', 'formtastic' ); ?></a></li>
 		<li><a href="#ft-tab-reply"><?php _e( 'Auto reply', 'formtastic' ); ?></a></li>
 		<li><a href="#ft-tab-copy"><?php _e( 'Copy', 'formtastic' ); ?></a></li>
-		<li><a href="#ft-tab-captcha"><?php _e( 'Captcha', 'formtastic' ); ?></a></li>
 		<li><a href="#ft-tab-mailchimp"><?php _e( 'Mailchimp', 'formtastic' ); ?></a></li>
 	</ul>
 
@@ -86,12 +85,6 @@ if ( empty( $formtastic ) ) {
 		<div id="ft-tab-form" class="ft-tab-content">
 			<div class="ft-settings">
 				<div class="ft-row">
-					<!-- <div class="ft-col ft-col-4">
-						<div class="ft-field">
-							<label for="form_row_classes"><?php //_e( 'Row class(es)', 'formtastic' ); ?> :</label>
-							<input type="text" name="formtastic[settings][form_row_classes]" id="form_row_classes" class="ft-input" value="<?php //echo ! empty( $formtastic['settings']['form_row_classes'] ) ? esc_html( $formtastic['settings']['form_row_classes'] ) : '' ?>">
-						</div>
-					</div> -->
 					<div class="ft-col ft-col-6">
 						<div class="ft-field">
 							<label for="optional_markup"><?php _e( 'Optional fields markup', 'formtastic' ); ?> :</label>
@@ -119,12 +112,6 @@ if ( empty( $formtastic ) ) {
 							<input type="text" name="formtastic[settings][button_classes]" id="button_classes" class="ft-input" placeholder="" value="<?php echo ! empty( $formtastic['settings']['button_classes'] ) ? esc_html( $formtastic['settings']['button_classes'] ) : '' ?>">
 						</div>
 					</div>
-					<!-- <div class="ft-col ft-col-4">
-						<div class="ft-field">
-							<label for="button_icon"><?php //_e( 'Button icon', 'formtastic' ); ?> :</label>
-							<input type="text" name="formtastic[settings][button_icon]" id="button_icon" class="ft-input" value="<?php //echo ! empty( $formtastic['settings']['button_icon'] ) ? esc_html( $formtastic['settings']['button_icon'] ) : '' ?>">
-						</div>
-					</div> -->
 				</div>
 			</div>
 		</div>
@@ -261,34 +248,6 @@ if ( empty( $formtastic ) ) {
 						<div class="ft-field">
 							<label for="copy_cond_value"><?php _e( 'Value', 'formtastic' ); ?> :</label>
 							<input type="text" name="formtastic[settings][copy_cond_value]" id="copy_cond_value" class="ft-input" value="<?php echo ! empty( $formtastic['settings']['copy_cond_value'] ) ? esc_html( $formtastic['settings']['copy_cond_value'] ) : '' ?>">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="ft-tab-captcha" class="ft-tab-content">
-			<div class="ft-settings">
-				
-				<div class="ft-row">
-					<div class="ft-col ft-col-12 ft-sep">
-						<div class="ft-field">
-							<label for="use_captcha">
-								<input type="checkbox" name="formtastic[settings][use_captcha]" id="use_captcha" value="yes" <?php if ( isset( $formtastic['settings']['use_captcha'] ) ) checked( $formtastic['settings']['use_captcha'], 'yes', true ); ?>>
-								<?php _e( 'Use captcha', 'formtastic' ); ?>
-							</label>
-						</div>
-					</div>
-					<div class="ft-col ft-col-6">
-						<div class="ft-field">
-							<label for="captcha_site_key"><?php _e( 'Site key', 'formtastic' ); ?> :</label>
-							<input type="text" name="formtastic[settings][captcha_site_key]" id="captcha_site_key" class="ft-input" value="<?php echo ! empty( $formtastic['settings']['captcha_site_key'] ) ? esc_html( $formtastic['settings']['captcha_site_key'] ) : '' ?>">
-						</div>
-					</div>
-					<div class="ft-col ft-col-6">
-						<div class="ft-field">
-							<label for="captcha_secret_key"><?php _e( 'Secret key', 'formtastic' ); ?> :</label>
-							<input type="text" name="formtastic[settings][captcha_secret_key]" id="captcha_secret_key" class="ft-input" value="<?php echo ! empty( $formtastic['settings']['captcha_secret_key'] ) ? esc_html( $formtastic['settings']['captcha_secret_key'] ) : '' ?>">
 						</div>
 					</div>
 				</div>

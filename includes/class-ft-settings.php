@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.9
+ * @version 2.7.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -206,30 +206,38 @@ class FT_Settings {
             'ft_general_scroll'          
         );
 
-		// add_settings_section(
-		//     'ft_general_class',
-		//     '<hr><br />' . __( 'Classes', 'formtastic' ),
-		//     function() {
-		//         print '';
-		//     },
-		//     'ft_general_settings'
-		// );
+		add_settings_section(
+		    'ft_general_captcha',
+		    '<hr><br />' . __( 'Captcha', 'formtastic' ),
+		    function() {
+		        print '';
+		    },
+		    'ft_general_settings'
+		);
 
-		// add_settings_field(
-		//     'ft_general_class_row',
-		//     __( 'Row class(es)', 'formtastic' ),
-		//     array( $this, 'general_class_row' ),
-		//     'ft_general_settings',
-		//     'ft_general_class'          
-		// );
+	    add_settings_field(
+	        'ft_general_use_captcha',
+	        __( 'Use captcha', 'formtastic' ),
+		    array( $this, 'general_use_captcha' ),
+	        'ft_general_settings',
+	        'ft_general_captcha'          
+	    );
 
-		// add_settings_field(
-		//     'ft_general_class_col',
-		//     __( 'Column class(es)', 'formtastic' ),
-		//     array( $this, 'general_class_col' ),
-		//     'ft_general_settings',
-		//     'ft_general_class'          
-		// );
+		add_settings_field(
+		    'ft_general_site_key',
+		    __( 'Site key', 'formtastic' ),
+		    array( $this, 'general_site_key' ),
+		    'ft_general_settings',
+		    'ft_general_captcha'          
+		);
+
+		add_settings_field(
+		    'ft_general_secret_key',
+		    __( 'Secret key', 'formtastic' ),
+		    array( $this, 'general_secret_key' ),
+		    'ft_general_settings',
+		    'ft_general_captcha'          
+		);
 
 		// add_settings_section(
 		//     'ft_general_role',
@@ -418,17 +426,24 @@ class FT_Settings {
 	    );
 	}
 
-	// public function general_class_row() {
-	//     echo sprintf( '<input type="text" id="general_class_row" placeholder="row" name="ft_general[class_row]" value="%s" />',
-	//     	! empty( $this->general['class_row'] ) ? $this->general['class_row'] : ''
-	//     );
-	// }
+	public function general_use_captcha() {
+	    echo sprintf( '<label for="general_use_captcha"><input type="checkbox" id="general_use_captcha" name="ft_general[use_captcha]" value="yes" %s/>%s</label>',
+	    	isset( $this->general['use_captcha'] ) ? checked( $this->general['use_captcha'], 'yes', false ) : '',
+	    	__( 'Use ReCaptcha', 'formtastic' )
+	    );
+	}
 
-	// public function general_class_col() {
-	//     echo sprintf( '<input type="text" id="general_class_col" placeholder="col col-" name="ft_general[class_col]" value="%s" />',
-	//     	! empty( $this->general['class_col'] ) ? $this->general['class_col'] : ''
-	//     );
-	// }
+	public function general_site_key() {
+	    echo sprintf( '<input type="text" id="general_site_key" placeholder="" name="ft_general[site_key]" value="%s" />',
+	    	! empty( $this->general['site_key'] ) ? $this->general['site_key'] : ''
+	    );
+	}
+
+	public function general_secret_key() {
+	    echo sprintf( '<input type="text" id="general_secret_key" placeholder="" name="ft_general[secret_key]" value="%s" />',
+	    	! empty( $this->general['secret_key'] ) ? $this->general['secret_key'] : ''
+	    );
+	}
 
 	// public function general_role_form() {
 	// 	$selected = ! empty( $this->general['role_form'] ) ? $this->general['role_form'] : 'manage_options';
