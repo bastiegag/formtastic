@@ -2,9 +2,13 @@
  * List of changes
  */
 
+2.7.1 - 08-16-2021
+• Added confirmation message filter
+• Fixed sending action
+
 2.7.0 - 05-21-2021
 • Added honeypot field
-• Updated to ReCaptcha v3
+• Updated to reCAPTCHA v3
 
 2.6.9 - 04-26-2021
 • Added response export

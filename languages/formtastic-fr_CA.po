@@ -517,11 +517,17 @@ msgstr "Veuillez cocher le formulaire captcha."
 msgid "You are a robot, access denied!"
 msgstr "Vous êtes un robot, accès refusé!"
 
-msgid "No secret key for ReCaptcha"
+msgid "No site key for reCAPTCHA"
+msgstr "Aucune clé du site pour ReCpatcha"
+
+msgid "No secret key for reCAPTCHA"
 msgstr "Aucune clé secrète pour ReCpatcha"
 
 msgid "Use captcha"
 msgstr "Utiliser un captcha"
+
+msgid "Use reCAPTCHA"
+msgstr "Utiliser reCAPTCHA"
 
 msgid "Subscribe to mailchimp"
 msgstr "Inscrire sur mailchimp"

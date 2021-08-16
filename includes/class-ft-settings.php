@@ -210,7 +210,7 @@ class FT_Settings {
 		    'ft_general_captcha',
 		    '<hr><br />' . __( 'Captcha', 'formtastic' ),
 		    function() {
-		        print '';
+		        print __( '<a href="https://www.google.com/recaptcha/" target="_blank">reCAPTCHA v3</a>', 'formtastic' );
 		    },
 		    'ft_general_settings'
 		);
@@ -429,7 +429,7 @@ class FT_Settings {
 	public function general_use_captcha() {
 	    echo sprintf( '<label for="general_use_captcha"><input type="checkbox" id="general_use_captcha" name="ft_general[use_captcha]" value="yes" %s/>%s</label>',
 	    	isset( $this->general['use_captcha'] ) ? checked( $this->general['use_captcha'], 'yes', false ) : '',
-	    	__( 'Use ReCaptcha', 'formtastic' )
+	    	__( 'Use reCAPTCHA', 'formtastic' )
 	    );
 	}
 

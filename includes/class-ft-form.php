@@ -138,7 +138,7 @@ class FT_Form {
 		$form .= '</div>';
 
 		/**
-		 * ReCaptcha v2
+		 * reCAPTCHA v2
 		 */
 		// if ( isset( $settings['use_captcha'] ) && $settings['use_captcha'] == 'yes' ) {
 		// 	$form .= sprintf( '<div class="ft-field ft-field--captcha"><div class="g-recaptcha" data-sitekey="%s"></div></div>',

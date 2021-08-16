@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.0
+ * @version 2.7.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -217,7 +217,7 @@ class FT_Proceed {
 				if ( isset( $options['use_captcha'] ) && $options['use_captcha'] == 'yes' ) {
 					if ( empty( $options['site_key'] ) ) {
 						$is_valid = false;
-						$msg      = __( 'No site key for ReCaptcha', 'formtastic' );
+						$msg      = __( 'No site key for reCAPTCHA', 'formtastic' );
 
 					} else if ( isset( $_POST['g-recaptcha-response'] ) ) {
 						$captcha = $_POST['g-recaptcha-response'];
@@ -228,7 +228,7 @@ class FT_Proceed {
 
 						} else if ( empty( $options['secret_key'] ) ) {
 							$is_valid = false;
-							$msg      = __( 'No secret key for ReCaptcha', 'formtastic' );
+							$msg      = __( 'No secret key for reCAPTCHA', 'formtastic' );
 
 						} else {
 							$secret_key    = $options['secret_key'];
@@ -501,6 +501,7 @@ class FT_Proceed {
 				 */
 				do_action( 'ft_success', $form_id, $keys );
 				$confirm = apply_filters( 'ft_confirmation', true );
+				$msg     = apply_filters( 'ft_msg', true );
 				$body    = apply_filters( 'ft_body', $body );
 
 				if ( $confirm ) {
@@ -983,7 +984,7 @@ class FT_Proceed {
 			
 		else :
 
-			if ( isset( $_POST['submit-' . $form_id] ) ) {
+			if ( isset( $_POST['formtastic-' . $form_id] ) ) {
 				$response = array(
 					'post_type'    => 'ft_response',
 					'post_title'   => $form['title'],
