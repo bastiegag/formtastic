@@ -97,7 +97,7 @@ class FT_Settings {
 			
 			<nav class="nav-tab-wrapper ft-nav-tab-wrapper">  
 				<a href="?post_type=formtastic&page=ft-settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e( 'General', 'formtastic' ); ?></a>  
-				<a href="?post_type=formtastic&page=ft-settings&tab=smtp" class="nav-tab <?php echo $active_tab == 'smtp' ? 'nav-tab-active' : ''; ?>"><?php _e( 'SMTP', 'formtastic' ); ?></a>
+				<?php /* <a href="?post_type=formtastic&page=ft-settings&tab=smtp" class="nav-tab <?php echo $active_tab == 'smtp' ? 'nav-tab-active' : ''; ?>"><?php _e( 'SMTP', 'formtastic' ); ?></a> */ ?>
 				<a href="?post_type=formtastic&page=ft-settings&tab=customize" class="nav-tab <?php echo $active_tab == 'customize' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Customize', 'formtastic' ); ?></a>  
 			</nav>
 
@@ -267,68 +267,68 @@ class FT_Settings {
 		/**
 		 * SMTP
 		 */
-		register_setting(
-		    'ft_smtp',
-		    'ft_smtp',
-		    array( $this, 'sanitize' )
-		);
+		// register_setting(
+		//     'ft_smtp',
+		//     'ft_smtp',
+		//     array( $this, 'sanitize' )
+		// );
 
-		add_settings_section(
-		    'ft_smtp',
-		    __( 'SMTP', 'formtastic' ),
-		    function() {
-		        print __( 'Enter your SMTP information below.', 'formtastic' );
-		    },
-		    'ft_smtp_settings'
-		);  
+		// add_settings_section(
+		//     'ft_smtp',
+		//     __( 'SMTP', 'formtastic' ),
+		//     function() {
+		//         print __( 'Enter your SMTP information below.', 'formtastic' );
+		//     },
+		//     'ft_smtp_settings'
+		// );  
 
-		add_settings_field(
-		    'ft_use_smtp',
-		    __( 'SMTP', 'formtastic' ),
-		    array( $this, 'smtp_use' ),
-		    'ft_smtp_settings',
-		    'ft_smtp'          
-		);
+		// add_settings_field(
+		//     'ft_use_smtp',
+		//     __( 'SMTP', 'formtastic' ),
+		//     array( $this, 'smtp_use' ),
+		//     'ft_smtp_settings',
+		//     'ft_smtp'          
+		// );
 
-		add_settings_field(
-		    'ft_host',
-		    __( 'Host', 'formtastic' ),
-		    array( $this, 'smtp_host' ),
-		    'ft_smtp_settings',
-		    'ft_smtp'          
-		);
+		// add_settings_field(
+		//     'ft_host',
+		//     __( 'Host', 'formtastic' ),
+		//     array( $this, 'smtp_host' ),
+		//     'ft_smtp_settings',
+		//     'ft_smtp'          
+		// );
 
-		add_settings_field(
-		    'ft_port',
-		    __( 'Port', 'formtastic' ),
-		    array( $this, 'smtp_port' ),
-		    'ft_smtp_settings',
-		    'ft_smtp'          
-		);
+		// add_settings_field(
+		//     'ft_port',
+		//     __( 'Port', 'formtastic' ),
+		//     array( $this, 'smtp_port' ),
+		//     'ft_smtp_settings',
+		//     'ft_smtp'          
+		// );
 
-		add_settings_field(
-		    'ft_encryption',
-		    __( 'Encryption', 'formtastic' ),
-		    array( $this, 'smtp_encryption' ),
-		    'ft_smtp_settings',
-		    'ft_smtp'          
-		); 
+		// add_settings_field(
+		//     'ft_encryption',
+		//     __( 'Encryption', 'formtastic' ),
+		//     array( $this, 'smtp_encryption' ),
+		//     'ft_smtp_settings',
+		//     'ft_smtp'          
+		// ); 
 
-		add_settings_field(
-		    'ft_username',
-		    __( 'Username', 'formtastic' ),
-		    array( $this, 'smtp_username' ),
-		    'ft_smtp_settings',
-		    'ft_smtp'          
-		);  
+		// add_settings_field(
+		//     'ft_username',
+		//     __( 'Username', 'formtastic' ),
+		//     array( $this, 'smtp_username' ),
+		//     'ft_smtp_settings',
+		//     'ft_smtp'          
+		// );  
 
-		add_settings_field(
-		    'ft_password',
-		    __( 'Password', 'formtastic' ),
-		    array( $this, 'smtp_password' ),
-		    'ft_smtp_settings',
-		    'ft_smtp'          
-		);
+		// add_settings_field(
+		//     'ft_password',
+		//     __( 'Password', 'formtastic' ),
+		//     array( $this, 'smtp_password' ),
+		//     'ft_smtp_settings',
+		//     'ft_smtp'          
+		// );
 
 	    /**
 	     * Customize

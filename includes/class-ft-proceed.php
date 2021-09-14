@@ -18,7 +18,7 @@ class FT_Proceed {
 
 	public function __construct() {
 		add_action( 'wp_loaded', array( $this, 'validate' ) );
-		add_action( 'phpmailer_init', array( $this, 'phpmailer' ) );
+		// add_action( 'phpmailer_init', array( $this, 'phpmailer' ) );
 	}
 
 	/**
