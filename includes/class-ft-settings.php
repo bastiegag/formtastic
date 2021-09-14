@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.0
+ * @version 2.7.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -88,7 +88,7 @@ class FT_Settings {
 	 */
 	public function output_settings() {
 		$this->general   = get_option( 'ft_general' );
-		// $this->smtp      = get_option( 'ft_smtp' );
+		$this->smtp      = get_option( 'ft_smtp' );
 		$this->customize = get_option( 'ft_customize' );
 		?>
 
@@ -97,7 +97,7 @@ class FT_Settings {
 			
 			<nav class="nav-tab-wrapper ft-nav-tab-wrapper">  
 				<a href="?post_type=formtastic&page=ft-settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e( 'General', 'formtastic' ); ?></a>  
-				<?php /*<a href="?post_type=formtastic&page=ft-settings&tab=smtp" class="nav-tab <?php echo $active_tab == 'smtp' ? 'nav-tab-active' : ''; ?>"><?php _e( 'SMTP', 'formtastic' ); ?></a>*/ ?>
+				<a href="?post_type=formtastic&page=ft-settings&tab=smtp" class="nav-tab <?php echo $active_tab == 'smtp' ? 'nav-tab-active' : ''; ?>"><?php _e( 'SMTP', 'formtastic' ); ?></a>
 				<a href="?post_type=formtastic&page=ft-settings&tab=customize" class="nav-tab <?php echo $active_tab == 'customize' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Customize', 'formtastic' ); ?></a>  
 			</nav>
 
@@ -110,9 +110,9 @@ class FT_Settings {
 						settings_fields( 'ft_general' );
 						do_settings_sections( 'ft_general_settings' );
 
-					// } else if ( $active_tab == 'smtp' ) {
-					// 	settings_fields( 'ft_smtp' );
-					// 	do_settings_sections( 'ft_smtp_settings' );
+					} else if ( $active_tab == 'smtp' ) {
+						settings_fields( 'ft_smtp' );
+						do_settings_sections( 'ft_smtp_settings' );
 
 					} else if ( $active_tab == 'customize' ) {
 						settings_fields( 'ft_customize' );
@@ -267,68 +267,68 @@ class FT_Settings {
 		/**
 		 * SMTP
 		 */
-		// register_setting(
-		//     'ft_smtp',
-		//     'ft_smtp',
-		//     array( $this, 'sanitize' )
-		// );
+		register_setting(
+		    'ft_smtp',
+		    'ft_smtp',
+		    array( $this, 'sanitize' )
+		);
 
-		// add_settings_section(
-		//     'ft_smtp',
-		//     __( 'SMTP', 'formtastic' ),
-		//     function() {
-		//         print __( 'Enter your SMTP information below.', 'formtastic' );
-		//     },
-		//     'ft_smtp_settings'
-		// );  
+		add_settings_section(
+		    'ft_smtp',
+		    __( 'SMTP', 'formtastic' ),
+		    function() {
+		        print __( 'Enter your SMTP information below.', 'formtastic' );
+		    },
+		    'ft_smtp_settings'
+		);  
 
-		// add_settings_field(
-		//     'ft_use_smtp',
-		//     __( 'SMTP', 'formtastic' ),
-		//     array( $this, 'smtp_use' ),
-		//     'ft_smtp_settings',
-		//     'ft_smtp'          
-		// );
+		add_settings_field(
+		    'ft_use_smtp',
+		    __( 'SMTP', 'formtastic' ),
+		    array( $this, 'smtp_use' ),
+		    'ft_smtp_settings',
+		    'ft_smtp'          
+		);
 
-		// add_settings_field(
-		//     'ft_host',
-		//     __( 'Host', 'formtastic' ),
-		//     array( $this, 'smtp_host' ),
-		//     'ft_smtp_settings',
-		//     'ft_smtp'          
-		// );
+		add_settings_field(
+		    'ft_host',
+		    __( 'Host', 'formtastic' ),
+		    array( $this, 'smtp_host' ),
+		    'ft_smtp_settings',
+		    'ft_smtp'          
+		);
 
-		// add_settings_field(
-		//     'ft_port',
-		//     __( 'Port', 'formtastic' ),
-		//     array( $this, 'smtp_port' ),
-		//     'ft_smtp_settings',
-		//     'ft_smtp'          
-		// );
+		add_settings_field(
+		    'ft_port',
+		    __( 'Port', 'formtastic' ),
+		    array( $this, 'smtp_port' ),
+		    'ft_smtp_settings',
+		    'ft_smtp'          
+		);
 
-		// add_settings_field(
-		//     'ft_encryption',
-		//     __( 'Encryption', 'formtastic' ),
-		//     array( $this, 'smtp_encryption' ),
-		//     'ft_smtp_settings',
-		//     'ft_smtp'          
-		// ); 
+		add_settings_field(
+		    'ft_encryption',
+		    __( 'Encryption', 'formtastic' ),
+		    array( $this, 'smtp_encryption' ),
+		    'ft_smtp_settings',
+		    'ft_smtp'          
+		); 
 
-		// add_settings_field(
-		//     'ft_username',
-		//     __( 'Username', 'formtastic' ),
-		//     array( $this, 'smtp_username' ),
-		//     'ft_smtp_settings',
-		//     'ft_smtp'          
-		// );  
+		add_settings_field(
+		    'ft_username',
+		    __( 'Username', 'formtastic' ),
+		    array( $this, 'smtp_username' ),
+		    'ft_smtp_settings',
+		    'ft_smtp'          
+		);  
 
-		// add_settings_field(
-		//     'ft_password',
-		//     __( 'Password', 'formtastic' ),
-		//     array( $this, 'smtp_password' ),
-		//     'ft_smtp_settings',
-		//     'ft_smtp'          
-		// );
+		add_settings_field(
+		    'ft_password',
+		    __( 'Password', 'formtastic' ),
+		    array( $this, 'smtp_password' ),
+		    'ft_smtp_settings',
+		    'ft_smtp'          
+		);
 
 	    /**
 	     * Customize
@@ -461,56 +461,56 @@ class FT_Settings {
 	// 	echo '</select>';
 	// }
 
-	// public function smtp_use() {
-	//     echo sprintf( '<label for="smtp_use"><input type="checkbox" id="smtp_use" name="ft_smtp[use]" value="yes" %s/>%s</label>',
-	//     	isset( $this->smtp['use'] ) ? checked( $this->smtp['use'], 'yes', false ) : '',
-	//     	__( 'Use SMTP', 'formtastic' )
-	//     );
-	// }
+	public function smtp_use() {
+	    echo sprintf( '<label for="smtp_use"><input type="checkbox" id="smtp_use" name="ft_smtp[use]" value="yes" %s/>%s</label>',
+	    	isset( $this->smtp['use'] ) ? checked( $this->smtp['use'], 'yes', false ) : '',
+	    	__( 'Use SMTP', 'formtastic' )
+	    );
+	}
 
-	// public function smtp_host() {
-	//     echo sprintf( '<input type="text" id="smtp_host" name="ft_smtp[host]" value="%s" />',
-	//         ! empty( $this->smtp['host'] ) ? $this->smtp['host'] : Formtastic::smtp( 'host' )
-	//     );
-	// }
+	public function smtp_host() {
+	    echo sprintf( '<input type="text" id="smtp_host" name="ft_smtp[host]" value="%s" />',
+	        ! empty( $this->smtp['host'] ) ? $this->smtp['host'] : Formtastic::smtp( 'host' )
+	    );
+	}
 
-	// public function smtp_port() {
-	//     echo sprintf( '<input type="text" id="smtp_port" name="ft_smtp[port]" value="%s" />',
-	//         ! empty( $this->smtp['port'] ) ? $this->smtp['port'] : Formtastic::smtp( 'port' )
-	//     );
-	// }
+	public function smtp_port() {
+	    echo sprintf( '<input type="text" id="smtp_port" name="ft_smtp[port]" value="%s" />',
+	        ! empty( $this->smtp['port'] ) ? $this->smtp['port'] : Formtastic::smtp( 'port' )
+	    );
+	}
 
-	// public function smtp_encryption() {
-	//     echo '<select id="smtp_encryption" name="ft_smtp[encryption]">';
-	//     echo sprintf( '<option value="%s" %s>%s</option>', 
-	//     	'none', 
-	//     	selected( $this->smtp['encryption'], 'none' ), 
-	//     	__( 'None', 'formtastic' ) 
-	//     );
-	//     echo sprintf( '<option value="%s" %s>%s</option>', 
-	//     	'tls', 
-	//     	selected( $this->smtp['encryption'], 'tls' ), 
-	//     	__( 'TLS', 'formtastic' ) 
-	//     );
-	//     echo sprintf( '<option value="%s" %s>%s</option>', 
-	//     	'ssl', 
-	//     	selected( $this->smtp['encryption'], 'ssl' ), 
-	//     	__( 'SSL', 'formtastic' ) 
-	//     );
-	// 	echo '</select>';
-	// }
+	public function smtp_encryption() {
+	    echo '<select id="smtp_encryption" name="ft_smtp[encryption]">';
+	    echo sprintf( '<option value="%s" %s>%s</option>', 
+	    	'none', 
+	    	selected( $this->smtp['encryption'], 'none' ), 
+	    	__( 'None', 'formtastic' ) 
+	    );
+	    echo sprintf( '<option value="%s" %s>%s</option>', 
+	    	'tls', 
+	    	selected( $this->smtp['encryption'], 'tls' ), 
+	    	__( 'TLS', 'formtastic' ) 
+	    );
+	    echo sprintf( '<option value="%s" %s>%s</option>', 
+	    	'ssl', 
+	    	selected( $this->smtp['encryption'], 'ssl' ), 
+	    	__( 'SSL', 'formtastic' ) 
+	    );
+		echo '</select>';
+	}
 
-	// public function smtp_username() {
-	//     echo sprintf( '<input type="text" id="smtp_username" name="ft_smtp[username]" value="%s" />',
-	//         ! empty( $this->smtp['username'] ) ? $this->smtp['username'] : Formtastic::smtp( 'username' )
-	//     );
-	// }
+	public function smtp_username() {
+	    echo sprintf( '<input type="text" id="smtp_username" name="ft_smtp[username]" value="%s" />',
+	        ! empty( $this->smtp['username'] ) ? $this->smtp['username'] : Formtastic::smtp( 'username' )
+	    );
+	}
 
-	// public function smtp_password() {
-	//     echo sprintf( '<input type="password" id="smtp_password" name="ft_smtp[password]" value="%s" />',
-	//         ! empty( $this->smtp['password'] ) ? $this->smtp['password'] : Formtastic::smtp( 'password' )
-	//     );
-	// }
+	public function smtp_password() {
+	    echo sprintf( '<input type="password" id="smtp_password" name="ft_smtp[password]" value="%s" />',
+	        ! empty( $this->smtp['password'] ) ? $this->smtp['password'] : Formtastic::smtp( 'password' )
+	    );
+	}
 
 	public function custom_logo() {
 	    $default_image = plugins_url( '../assets/img/placeholder.png', __FILE__ );

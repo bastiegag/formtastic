@@ -2,6 +2,10 @@
  * List of changes
  */
 
+2.7.2 - 09-14-2021
+• Fixed sending action
+• Added sendgrid
+
 2.7.1 - 08-16-2021
 • Added confirmation message filter
 • Fixed sending action

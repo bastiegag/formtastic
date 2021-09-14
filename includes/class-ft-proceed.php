@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.1
+ * @version 2.7.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -31,7 +31,7 @@ class FT_Proceed {
 			return false;
 		}
 
-		if ( ! isset( $options['encryption'] ) || $options['encryption'] !== 'none' ) {
+		if ( ! isset( $options['encryption'] ) || $options['encryption'] == 'none' ) {
 			$options['encryption'] = false;
 		}
 
