@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.3
+ * @version 2.7.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

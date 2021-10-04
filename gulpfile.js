@@ -78,12 +78,6 @@ function js_back() {
 				.pipe( jshint() )
 				.pipe( jshint.reporter( 'default' ) )
 				.pipe( concat( 'formtastic-admin.js' ) )
-				.pipe( gulp.dest( 'assets/js' ) )
-				.pipe( terser() )
-				.on( 'error', function( err ) { 
-					util.log( util.colors.red( '[Error]' ), err.toString() ); 
-				} )
-				.pipe( rename( { suffix: '.min' } ) )
 				.pipe( gulp.dest( 'assets/js' ) );
 }
 
@@ -93,12 +87,9 @@ function js_front() {
 				.pipe( jshint.reporter( 'default' ) )
 				.pipe( concat( 'formtastic.js' ) )
 				.pipe( gulp.dest( 'assets/js' ) )
-				.pipe( terser() )
 				.on( 'error', function( err ) { 
 					util.log( util.colors.red( '[Error]' ), err.toString() ); 
-				} )
-				.pipe( rename( { suffix: '.min' } ) )
-				.pipe( gulp.dest( 'assets/js' ) );
+				} );
 }
 
 // Images task

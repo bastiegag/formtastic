@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.0
+ * @version 2.7.3
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -41,7 +41,7 @@ class FT_Register {
 		/**
 		 * Scripts
 		 */
-		wp_enqueue_script( 'formtastic', $plugin_url . 'assets/js/formtastic' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' ) . '.js', array( 'jquery', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), $version, true );
+		wp_enqueue_script( 'formtastic', $plugin_url . 'assets/js/formtastic.js', array( 'jquery', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), $version, true );
 
 		$vars = array(
 			'site_url'   => home_url(),
@@ -93,7 +93,7 @@ class FT_Register {
 			wp_enqueue_style( 'wp-color-picker' ); 
 			
 			wp_enqueue_script( 'jquery-ui-draggable' );
-			wp_enqueue_script( 'formtastic-admin-scripts', $plugin_url . 'assets/js/formtastic-admin' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' ) . '.js', array( 'jquery', 'wp-color-picker' ), $version, true );
+			wp_enqueue_script( 'formtastic-admin-scripts', $plugin_url . 'assets/js/formtastic-admin.js', array( 'jquery', 'wp-color-picker' ), $version, true );
 			
 			$vars = array(
 				'ajax_url'   => admin_url( 'admin-ajax.php' ),

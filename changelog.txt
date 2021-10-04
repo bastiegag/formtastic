@@ -2,12 +2,12 @@
  * List of changes
  */
 
-2.7.3 - 10-04-2021
-• Fixed sending action (again)
-• Removed SMTP options
-
-2.7.2 - 09-14-2021
+2.7.2 - 10-04-2021
 • Fixed sending action
+• Removed SMTP options
+• Removed minified js
+• Updated gulp
+• Updated script enqueue
 
 2.7.1 - 08-16-2021
 • Added confirmation message filter
