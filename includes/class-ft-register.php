@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.3
+ * @version 2.7.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -38,11 +38,6 @@ class FT_Register {
 		
 		wp_enqueue_style( 'wp-color-picker' );
 
-		/**
-		 * Scripts
-		 */
-		wp_enqueue_script( 'formtastic', $plugin_url . 'assets/js/formtastic.js', array( 'jquery', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), $version, true );
-
 		$vars = array(
 			'site_url'   => home_url(),
 			'site_title' => get_bloginfo( 'name' ),
@@ -60,6 +55,11 @@ class FT_Register {
 
 			wp_enqueue_script( 'formtastic-captcha', '//www.google.com/recaptcha/api.js?render=' . $options['site_key'], array( 'jquery' ), '3.0.0', true );
 		}
+
+		/**
+		 * Scripts
+		 */
+		wp_enqueue_script( 'formtastic', $plugin_url . 'assets/js/formtastic.js', array( 'jquery', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), $version, true );
 
 		wp_localize_script( 'formtastic', 'ft', $vars );
 	}
