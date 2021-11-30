@@ -203,6 +203,27 @@ if ( ! function_exists( 'ft_get_value' ) ) {
 	}
 }
 
+if ( ! function_exists( 'ft_get_from_ip' ) ) {
+	/** 
+	 * Get user IP
+	 * @return string values
+	 */
+	function ft_get_from_ip(){
+
+		$value = '';
+
+		if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)){
+			$value = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		}else if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP)){
+			$value = $_SERVER['HTTP_CLIENT_IP'];
+		}else{
+			$value = $_SERVER["REMOTE_ADDR"];
+		}
+
+		return $value;
+	}
+}
+
 if ( ! function_exists( 'ft_get_form_meta' ) ) {
 	/** 
 	 * Get form meta

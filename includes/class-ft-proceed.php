@@ -318,6 +318,7 @@ class FT_Proceed {
 				$formtastic = get_post_meta( $form_id, 'formtastic', true );
 				$settings   = $formtastic['settings'];
 				$options    = get_option( 'ft_general' );
+				
 
 				$upload      = wp_upload_dir();
 				$upload_dir  = $upload['baseurl'] . '/formtastic_uploads/';
@@ -485,7 +486,7 @@ class FT_Proceed {
 
 				$body .= sprintf( '<footer style="display: block; margin-top: 30px; overflow: hidden; border-top: 1px solid #e6e6e6; padding-top: 6px; color: #aaa;"><small style="">%s %s</small><small style="float: right;">%s</small></footer>',
 					__( 'Send on', 'formtastic' ),
-					ft_date( current_time( 'j-n-Y' ) ) . ' - ' . current_time( 'G\hi' ),
+					ft_date( current_time( 'j-n-Y' ) ) . ' - ' . current_time( 'G\hi' ) . ' - IP: '.ft_get_from_ip(),
 					get_the_title( $form_id )
 				);
 
@@ -574,6 +575,7 @@ class FT_Proceed {
 								'form'       => get_the_title( $form_id ),
 								'from_email' => $from_real[0],
 								'from_name'  => $from_name,
+								'from_ip'	 => ft_get_from_ip(),
 								'title'      => $object,
 								'array'		 => json_encode( $array )
 							);
@@ -1000,6 +1002,7 @@ class FT_Proceed {
 				update_post_meta( $post_id, 'ft_name', $form['from_name'] );
 				update_post_meta( $post_id, 'ft_email', $form['from_email'] );
 				update_post_meta( $post_id, 'ft_form_id', $form_id );
+				update_post_meta( $post_id, 'ft_from_ip', ft_get_from_ip() );
 
 				if ( isset( $form['files'] ) ) {
 					update_post_meta( $post_id, 'ft_file', wp_json_encode( $form['files'], JSON_UNESCAPED_UNICODE ) );
