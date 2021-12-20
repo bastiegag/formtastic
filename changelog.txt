@@ -2,6 +2,10 @@
  * List of changes
  */
 
+2.7.3 - 12-20-2021
+• Added IP in the footer of response
+• Fixed reCAPTCHA
+
 2.7.2 - 10-04-2021
 • Fixed sending action
 • Removed SMTP options

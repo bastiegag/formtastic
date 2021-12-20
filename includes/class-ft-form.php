@@ -91,6 +91,7 @@ class FT_Form {
 
 		if ( isset( $options['use_captcha'] ) && $options['use_captcha'] == 'yes' ) {
 			$form .= '<input type="hidden" name="g-recaptcha-response" value="0">';
+			$form .= '<input type="hidden" name="action" value="formtastic">';
 		}
 
 		$form .= sprintf( '<div class="ft-row%s">', 

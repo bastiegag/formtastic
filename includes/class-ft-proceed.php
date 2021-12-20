@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.2
+ * @version 2.7.3
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -318,7 +318,6 @@ class FT_Proceed {
 				$formtastic = get_post_meta( $form_id, 'formtastic', true );
 				$settings   = $formtastic['settings'];
 				$options    = get_option( 'ft_general' );
-				
 
 				$upload      = wp_upload_dir();
 				$upload_dir  = $upload['baseurl'] . '/formtastic_uploads/';

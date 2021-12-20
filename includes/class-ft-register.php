@@ -53,7 +53,7 @@ class FT_Register {
 			$vars['site_key']    = $options['site_key'];
 			$vars['use_captcha'] = $options['use_captcha'];
 
-			wp_enqueue_script( 'formtastic-captcha', '//www.google.com/recaptcha/api.js?render=' . $options['site_key'], array( 'jquery' ), '3.0.0', true );
+			wp_enqueue_script( 'formtastic-captcha', '//www.google.com/recaptcha/api.js?render=' . $options['site_key'], array( 'jquery' ), '3.0.0', false );
 		}
 
 		/**

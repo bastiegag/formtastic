@@ -3808,10 +3808,10 @@ return $;
                     event.preventDefault();
                     
                     grecaptcha.ready( function() {
-                        grecaptcha.execute( ft.site_key, { action: 'submit' } ).then( function( token ) {
+                        grecaptcha.execute( ft.site_key, { action: 'formtastic' } ).then( function( token ) {
                             form.find( 'input[name="g-recaptcha-response"]' ).val( token );
 
-                            form.submit();
+                            form.unbind( 'submit' ).submit();
                         });
                     });
                 }

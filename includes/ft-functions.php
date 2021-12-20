@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.1
+ * @version 2.7.3
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -212,11 +212,13 @@ if ( ! function_exists( 'ft_get_from_ip' ) ) {
 
 		$value = '';
 
-		if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)){
+		if ( filter_var( @$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP ) ) {
 			$value = $_SERVER['HTTP_X_FORWARDED_FOR'];
-		}else if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP)){
+
+		} else if ( filter_var( @$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP ) ) {
 			$value = $_SERVER['HTTP_CLIENT_IP'];
-		}else{
+
+		} else {
 			$value = $_SERVER["REMOTE_ADDR"];
 		}
 
