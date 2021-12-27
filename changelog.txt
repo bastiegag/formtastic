@@ -2,6 +2,9 @@
  * List of changes
  */
 
+2.7.4 - 12-27-2021
+• Fixed radio/checkbox multiple values
+
 2.7.3 - 12-20-2021
 • Added IP in the footer of response
 • Fixed reCAPTCHA

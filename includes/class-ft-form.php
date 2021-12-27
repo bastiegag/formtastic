@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.0
+ * @version 2.7.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -512,13 +512,16 @@ class FT_Form {
 					foreach( $values as $key ) {
 						$status = '';
 						$checked = '';
-						switch( $key['status'] ) {
-							case 'disabled' :
-								$status = ' disabled="disabled"';
-								break;
-							case 'checked' :
-								$status = ' checked="checked"';
-								break;
+
+						if ( isset( $key['status'] ) ) {
+							switch( $key['status'] ) {
+								case 'disabled' :
+									$status = ' disabled="disabled"';
+									break;
+								case 'checked' :
+									$status = ' checked="checked"';
+									break;
+							}
 						}
 
 						if ( isset( $_POST[ $id ] ) ) {
@@ -527,7 +530,7 @@ class FT_Form {
 						} else if ( apply_filters( 'ft_value', '', $id ) == $key['value'] ) {
 							$checked = checked( apply_filters( 'ft_value', '', $id ), $key['value'], false );
 						
-						} else if ( $key['selected'] ) {
+						} else if ( isset( $key['selected'] ) && $key['selected'] ) {
 							$checked = 'checked="checked"';
 						}
 
@@ -570,15 +573,18 @@ class FT_Form {
 				if ( ! empty( $values ) ) {
 					$input = sprintf( '<div id="%s" class="ft-input--checkbox"%s>', $id, ! empty( $field['max'] ) ? ' data-max="' . $field['max'] . '" data-chosen="0"' : '' );
 					foreach( $values as $key ) {
-						$status = '';
+						$status  = '';
 						$checked = '';
-						switch( $key['status'] ) {
-							case 'disabled' :
-								$status = ' disabled="disabled"';
-								break;
-							case 'checked' :
-								$status = ' checked="checked"';
-								break;
+
+						if ( isset( $key['status'] ) ) {
+							switch( $key['status'] ) {
+								case 'disabled' :
+									$status = ' disabled="disabled"';
+									break;
+								case 'checked' :
+									$status = ' checked="checked"';
+									break;
+							}
 						}
 
 						if ( isset( $_POST[ $id ] ) && is_array( $_POST[ $id ] ) ) {
@@ -590,7 +596,7 @@ class FT_Form {
 						} else if ( apply_filters( 'ft_value', '', $id ) == $key['value'] ) {
 							$checked = checked( apply_filters( 'ft_value', '', $id ), $key['value'], false );
 						
-						} else if ( $key['selected'] ) {
+						} else if ( isset( $key['selected'] ) && $key['selected'] ) {
 							$checked = 'checked="checked"';
 						}
 
