@@ -145,6 +145,9 @@ msgstr "Message d'aide"
 msgid "Error, nonce is not valid"
 msgstr "Erreur, le nonce n'est pas valide"
 
+msgid "Error, IP address is not valid"
+msgstr "Erreur, l'adresse IP n'est pas valide"
+
 msgid "Success message"
 msgstr "Message de succès"
 
@@ -660,3 +663,18 @@ msgstr "Balise HTML"
 
 msgid "Some of your forms recipients are not set or are still in dev."
 msgstr "Certains destinataires de vos formulaires ne sont pas définis ou sont encore en développement."
+
+msgid "Blacklist"
+msgstr "Liste noire"
+
+msgid "List of IP addresses to block, separated by a comma."
+msgstr "Liste des adresses IP à bloquer, séparé par une virgule."
+
+msgid "IP addresses"
+msgstr "Adresses IP"
+
+msgid "Mark as spam"
+msgstr "Marquer comme spam"
+
+msgid "Unmark as spam"
+msgstr "Démarquer comme spam"

@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.3
+ * @version 2.7.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -307,8 +307,14 @@ class FT_Proceed {
 		$version = Formtastic::version();
 		$nonce   = 'formtastic-' . $form_id;
 
+		$bl = get_option( 'ft_blacklist' );
+		$blacklist = array_map( 'trim', explode( ',', $bl['ip_addresses'] ) );
+
 		if ( ! wp_verify_nonce( $_REQUEST[ $nonce ], 'formtastic_proceed' ) ) :
 			self::confirmation( false, __( 'Error, nonce is not valid', 'formtastic' ) );
+
+		elseif ( in_array( ft_get_from_ip(), $blacklist ) ) :
+			self::confirmation( false, __( 'Error, IP address is not valid', 'formtastic' ) );
 
 		else :
 
@@ -485,7 +491,7 @@ class FT_Proceed {
 
 				$body .= sprintf( '<footer style="display: block; margin-top: 30px; overflow: hidden; border-top: 1px solid #e6e6e6; padding-top: 6px; color: #aaa;"><small style="">%s %s</small><small style="float: right;">%s</small></footer>',
 					__( 'Send on', 'formtastic' ),
-					ft_date( current_time( 'j-n-Y' ) ) . ' - ' . current_time( 'G\hi' ) . ' - IP: '.ft_get_from_ip(),
+					ft_date( current_time( 'j-n-Y' ) ) . ' - ' . current_time( 'G\hi' ) . ' - IP: ' . ft_get_from_ip(),
 					get_the_title( $form_id )
 				);
 

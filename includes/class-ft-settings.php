@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.2
+ * @version 2.7.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -90,6 +90,7 @@ class FT_Settings {
 		$this->general   = get_option( 'ft_general' );
 		$this->smtp      = get_option( 'ft_smtp' );
 		$this->customize = get_option( 'ft_customize' );
+		$this->blacklist = get_option( 'ft_blacklist' );
 		?>
 
 		<div class="wrap">
@@ -99,6 +100,7 @@ class FT_Settings {
 				<a href="?post_type=formtastic&page=ft-settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e( 'General', 'formtastic' ); ?></a>  
 				<?php /* <a href="?post_type=formtastic&page=ft-settings&tab=smtp" class="nav-tab <?php echo $active_tab == 'smtp' ? 'nav-tab-active' : ''; ?>"><?php _e( 'SMTP', 'formtastic' ); ?></a> */ ?>
 				<a href="?post_type=formtastic&page=ft-settings&tab=customize" class="nav-tab <?php echo $active_tab == 'customize' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Customize', 'formtastic' ); ?></a>  
+				<a href="?post_type=formtastic&page=ft-settings&tab=blacklist" class="nav-tab <?php echo $active_tab == 'blacklist' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Blacklist', 'formtastic' ); ?></a>  
 			</nav>
 
 			<h1 class="screen-reader-text"><?php _e( 'Formtastic settings', 'formtastic' ); ?></h1>
@@ -117,6 +119,10 @@ class FT_Settings {
 					} else if ( $active_tab == 'customize' ) {
 						settings_fields( 'ft_customize' );
 						do_settings_sections( 'ft_customize_settings' );
+
+					} else if ( $active_tab == 'blacklist' ) {
+						settings_fields( 'ft_blacklist' );
+						do_settings_sections( 'ft_blacklist_settings' );
 					}
 
 					submit_button();
@@ -363,6 +369,32 @@ class FT_Settings {
 	        'ft_customize_settings',
 	        'ft_customize'
 	    );
+
+	    /**
+	     * Blacklist
+	     */
+	    register_setting(
+	        'ft_blacklist',
+	        'ft_blacklist',
+	        array( $this, 'sanitize' )
+	    );
+
+	    add_settings_section(
+	        'ft_blacklist_list',
+	        __( 'Blacklist', 'formtastic' ),
+	        function() {
+	    		print __( 'List of IP addresses to block, separated by a comma.', 'formtastic' );
+	        },
+	        'ft_blacklist_settings'
+	    );
+
+	    add_settings_field(
+	        'ft_blacklist_dev_email',
+	        __( 'IP addresses', 'formtastic' ),
+	        array( $this, 'blacklist_ip_addresses' ),
+	        'ft_blacklist_settings',
+	        'ft_blacklist_list'          
+	    );
 	}
 
 	/**
@@ -561,6 +593,12 @@ class FT_Settings {
 		}
 
 		return $output;
+	}
+
+	public function blacklist_ip_addresses() {
+	    echo sprintf( '<textarea id="blacklist_ip_addresses" name="ft_blacklist[ip_addresses]" rows="5">%s</textarea>',
+	        ! empty( $this->blacklist['ip_addresses'] ) ? $this->blacklist['ip_addresses'] : ''
+	    );
 	}
 
 }

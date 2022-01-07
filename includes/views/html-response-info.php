@@ -4,7 +4,7 @@
  * 
  * @author  Sébastien Gagné
  * @package Formtastic/Views
- * @version 2.0.1
+ * @version 2.7.5
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -16,6 +16,7 @@ $from    = get_post_meta( $post_id, 'ft_name', true );
 $email   = get_post_meta( $post_id, 'ft_email', true );
 $form_id = get_post_meta( $post_id, 'ft_form_id', true );
 $files   = get_post_meta( $post_id, 'ft_file', true );
+$spam    = get_post_meta( $post_id, 'ft_spam', true );
 ?>
 
 <div class="ft-response-info">
@@ -78,6 +79,21 @@ $files   = get_post_meta( $post_id, 'ft_file', true );
 				get_delete_post_link( $post->ID ),
 				__( 'Delete response', 'formtastic' )
 			);
+
+			$spam = get_post_meta( $post_id, 'ft_spam', true );
+
+			if ( $spam ) {
+				echo sprintf( '<br /><p style="margin: 10px 0 0 0;"><small><a href="#" class="ft-unspam" data-response="%s">%s</a></small></p>',
+					$post_id,
+					__( 'Unmark as spam', 'formtastic' )
+				);
+
+			} else {
+				echo sprintf( '<br /><p style="margin: 10px 0 0 0;"><small><a href="#" class="ft-spam" data-response="%s">%s</a></small></p>',
+					$post_id,
+					__( 'Mark as spam', 'formtastic' )
+				);
+			}
 		?>
 	</header>
 </div>

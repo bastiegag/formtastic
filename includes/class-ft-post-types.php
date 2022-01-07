@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.6.9
+ * @version 2.7.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -306,6 +306,7 @@ class FT_Post_types {
 	        if ( $key == 'title' ) {
 	            $new_columns['read']   = '';
 	            $new_columns['resend'] = '';
+	            $new_columns['spam'] = '';
 	        }
 
 	        if ( $key == 'date' ) {
@@ -375,6 +376,26 @@ class FT_Post_types {
 					$post_id,
 					ft_icon( 'redo' )
 				);
+				break;
+
+			case 'spam' :
+				$spam = get_post_meta( $post_id, 'ft_spam', true );
+
+				if ( $spam ) {
+					echo sprintf( '<a href="#" class="ft-icon ft-unspam" title="%s" data-response="%s">%s</a>', 
+						__( 'Unmark as spam', 'formtastic' ),
+						$post_id,
+						ft_icon( 'radio' )
+					);
+
+				} else {
+					echo sprintf( '<a href="#" class="ft-icon ft-spam" title="%s" data-response="%s">%s</a>', 
+						__( 'Mark as spam', 'formtastic' ),
+						$post_id,
+						ft_icon( 'warning' )
+					);
+				}
+				
 				break;
 		}
 	}

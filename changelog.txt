@@ -2,6 +2,10 @@
  * List of changes
  */
 
+2.7.5 - 01-06-2022
+• Added IP blacklist
+• Added mark as spam button
+
 2.7.4 - 12-27-2021
 • Fixed radio/checkbox multiple values
 

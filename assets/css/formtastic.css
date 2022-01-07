@@ -234,8 +234,10 @@
 }
 
 .column-read,
-.column-resend {
+.column-resend,
+.column-spam {
 	width: 24px;
+	padding: 8px 4px !important;
 }
 
 .column-actions {
@@ -265,12 +267,17 @@
 	transition: all 0.3s ease-out;
 }
 
-.ft-sending {
+.ft-sending,
+.ft-spamming {
 	opacity: 0.25;
 }
 
 .ft-sended {
 	background: rgba(50, 193, 127, 0.1) !important;
+}
+
+.ft-spammed {
+	background: rgba(254, 110, 106, 0.1) !important;
 }
 
 .ft-del {
@@ -279,16 +286,33 @@
 
 .ft-resend {
 	fill: #ccc;
-	font-size: 20px;
 	-webkit-transition: all 0.3s ease-out;
 	transition: all 0.3s ease-out;
 }
 
-.ft-resend:hover {
+.ft-spam {
+	fill: #fe6e6a;
+	color: #fe6e6a;
+	-webkit-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+
+.ft-unspam {
+	fill: #32c17e;
+	color: #32c17e;
+	-webkit-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+
+.ft-resend:hover,
+.ft-unspam:hover,
+.ft-spam:hover {
 	fill: #555;
 }
 
-.ft-resend.is-process {
+.ft-resend.is-process,
+.ft-unspam.is-process,
+.ft-spam.is-process {
 	opacity: 0.5;
 	fill: #555;
 }

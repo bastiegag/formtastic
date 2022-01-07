@@ -4,7 +4,7 @@
  * 
  * @author  Sébastien Gagné
  * @package Formtastic/Views
- * @version 2.1.2
+ * @version 2.7.5
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -14,9 +14,10 @@ $read    = get_post_meta( $post->ID, 'ft_read', true );
 $from    = get_post_meta( $post->ID, 'ft_name', true );
 $email   = get_post_meta( $post->ID, 'ft_email', true );
 $form_id = get_post_meta( $post->ID, 'ft_form_id', true );
+$spam    = get_post_meta( $post->ID, 'ft_spam', true );
 ?>
 
-<div class="ft-response">
+<div class="ft-response<?php echo $spam == 'spam' ? ' is-spam' : ''; ?>">
 	<div class="bar bar-top"></div>
 	<?php 
 		$post_id  = get_the_ID();
