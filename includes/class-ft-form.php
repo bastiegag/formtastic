@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.4
+ * @version 2.7.6
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class FT_Form {
 
-	/** 
+	/**
 	 * Build form
 	 * @param  int $form_id Form ID
 	 * @return void
@@ -94,7 +94,7 @@ class FT_Form {
 			$form .= '<input type="hidden" name="action" value="formtastic">';
 		}
 
-		$form .= sprintf( '<div class="ft-row%s">', 
+		$form .= sprintf( '<div class="ft-row%s">',
 			! empty( $options['class_row'] ) ? ' ' . esc_attr( $options['class_row'] ) : ' row'
 		);
 
@@ -163,7 +163,7 @@ class FT_Form {
 		return $form;
 	}
 
-	/** 
+	/**
 	 * Render field
 	 * @param  array $data Field data
 	 * @return void
@@ -243,7 +243,7 @@ class FT_Form {
 
 		if ( $type == 'row' ) {
 			$before = '</div>';
-			$after  = sprintf( '<div class="ft-row%s">', 
+			$after  = sprintf( '<div class="ft-row%s">',
 				! empty( $options['class_row'] ) ? ' ' . esc_attr( $options['class_row'] ) : ' row'
 			);
 			$label = '';
@@ -262,12 +262,12 @@ class FT_Form {
 			$after .= '</div>';
 
 			if ( $type == 'repeater' ) {
-				$after .= sprintf( '</div><div class="ft-row%s">', 
+				$after .= sprintf( '</div><div class="ft-row%s">',
 					! empty( $options['class_row'] ) ? ' ' . esc_attr( $options['class_row'] ) : ' row'
 				);
 			}
 		}
-		
+
 		switch ( $type ) {
 			case 'email' :
 			case 'name' :
@@ -278,7 +278,7 @@ class FT_Form {
 			case 'color' :
 				$required .= ' data-rule-ft-' . $type . '="true"';
 				break;
-				
+
 			case 'time' :
 				$required .= ' data-timepicker data-rule-ft-' . $type . '="true"';
 				break;
@@ -426,7 +426,7 @@ class FT_Form {
 
 			case 'select' :
 				$input = '<select id="' . $id . '" name="' . $id . '[]"' . $multiple .' class="ft-select form-control" data-msg="' . $invalid . '"' . $required . $attr . '>';
-				
+
 				if ( empty( $multiple ) && ! empty( $placeholder ) ) {
 					$input .= '<option value="">' . $placeholder . '</option>';
 				}
@@ -484,7 +484,7 @@ class FT_Form {
 						);
 					}
 				}
-				
+
 				$input .= '</select>';
 				break;
 
@@ -506,7 +506,7 @@ class FT_Form {
 				}
 
 				$values = apply_filters( 'ft_value', $values, $id );
-				
+
 				if ( ! empty( $values ) ) {
 					$input = sprintf( '<div id="%s">', $id );
 					foreach( $values as $key ) {
@@ -529,7 +529,7 @@ class FT_Form {
 
 						} else if ( apply_filters( 'ft_value', '', $id ) == $key['value'] ) {
 							$checked = checked( apply_filters( 'ft_value', '', $id ), $key['value'], false );
-						
+
 						} else if ( isset( $key['selected'] ) && $key['selected'] ) {
 							$checked = 'checked="checked"';
 						}
@@ -595,7 +595,7 @@ class FT_Form {
 
 						} else if ( apply_filters( 'ft_value', '', $id ) == $key['value'] ) {
 							$checked = checked( apply_filters( 'ft_value', '', $id ), $key['value'], false );
-						
+
 						} else if ( isset( $key['selected'] ) && $key['selected'] ) {
 							$checked = 'checked="checked"';
 						}
@@ -636,7 +636,7 @@ class FT_Form {
 		}
 	}
 
-	/** 
+	/**
 	 * Get manual value(s)
 	 * @param  array $values
 	 * @return array Values
@@ -675,7 +675,7 @@ class FT_Form {
 		return $output;
 	}
 
-	/** 
+	/**
 	 * Get taxonomy value(s)
 	 * @param  array $values
 	 * @return array Values
@@ -700,7 +700,7 @@ class FT_Form {
 		return $output;
 	}
 
-	/** 
+	/**
 	 * Get post type value(s)
 	 * @param  array $values
 	 * @return array Values
@@ -709,11 +709,12 @@ class FT_Form {
 		$output = array();
 
 		$posts = get_posts( array(
-			'order'          => 'asc',
-			'orderby'        => 'name',
-			'post_status'    => 'publish',
-			'post_type'      => $post_type,
-			'posts_per_page' => -1,
+			'order'            => 'asc',
+			'orderby'          => 'name',
+			'post_status'      => 'publish',
+			'post_type'        => $post_type,
+			'posts_per_page'   => -1,
+			'suppress_filters' => 0,
 		) );
 
 		if ( ! empty( $posts ) ) {

@@ -3,7 +3,7 @@
  * Plugin Name: Formtastic
  * Plugin URI: http://formtastic.sebastiengagne.ca/
  * Description: Plugin to create forms easily, it's formtastic!
- * Version: 2.7.5
+ * Version: 2.7.6
  * Author: Sébastien Gagné
  * Author URI: http://sebastiengagne.ca/
  *
@@ -30,7 +30,7 @@ class Formtastic {
 		add_action( 'wp_mail_failed', array( $this, 'wp_error' ), 10, 1 );
 
 		self::create_directory();
-		
+
 		include_once( 'includes/class-ft-register.php' );
 		include_once( 'includes/class-ft-post-types.php' );
 		include_once( 'includes/class-ft-meta-boxes.php' );
@@ -50,28 +50,28 @@ class Formtastic {
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'add_action_links' ), 10, 2 );
 	}
 
-	/** 
+	/**
 	 * Load text domain
 	 */
 	public static function load_plugin_textdomain() {
 	    load_plugin_textdomain( 'formtastic', false, basename( dirname( __FILE__ ) ) . '/languages' );
 	}
 
-	/** 
+	/**
 	 * Plugin Url
 	 */
 	public static function plugin_url() {
 	    return plugins_url( '/', __FILE__ );
 	}
 
-	/** 
+	/**
 	 * Plugin version
 	 */
 	public static function version() {
-	    return '2.7.5';
+	    return '2.7.6';
 	}
 
-	/** 
+	/**
 	 * Default SMTP options
 	 */
 	public static function smtp( $key = 'host' ) {
@@ -86,7 +86,7 @@ class Formtastic {
 	    return $arr[ $key ];
 	}
 
-	/** 
+	/**
 	 * Error log wp_mail_failed
 	 */
 	public function wp_error( $wp_error ) {
@@ -117,19 +117,19 @@ class Formtastic {
 		}
 	}
 
-	/** 
+	/**
 	 * Add action links to plugin
 	 * @param  array $links Actions link
 	 * @return array
 	 */
 	public function add_action_links( $links ) {
-		$custom = array( 
-			sprintf( '<a href="%s">%s</a>', 
-				admin_url( 'edit.php?post_type=formtastic&page=ft-settings' ), 
-				__( 'Settings', 'formtastic' ) 
-			) 
+		$custom = array(
+			sprintf( '<a href="%s">%s</a>',
+				admin_url( 'edit.php?post_type=formtastic&page=ft-settings' ),
+				__( 'Settings', 'formtastic' )
+			)
 		);
-		
+
 		return array_merge( $links, $custom );
 	}
 }
