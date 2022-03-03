@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.5
+ * @version 2.7.7
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -44,7 +44,7 @@ class FT_Proceed {
 		$phpmailer->SMTPSecure = $options['encryption'];
 	}
 
-	/** 
+	/**
 	 * Validate
 	 * @return void
 	 */
@@ -71,7 +71,7 @@ class FT_Proceed {
 
 		elseif ( ! empty( $_POST['firstname'] ) ) :
 			self::confirmation( false, __( 'You are a robot, access denied!', 'formtastic' ) );
-		
+
 		else :
 
 			$required    = array();
@@ -98,6 +98,8 @@ class FT_Proceed {
 				'select'   => "#^(.*)#i",
 				'radio'    => "#^(.*)#i",
 				'checkbox' => "#^(.*)#i",
+				'sep'      => "#^(.*)#i",
+				'redo'     => "#^(.*)#i",
 				'file'     => "#^(.*)#i",
 				'hidden'   => "#^(.*)#i",
 				'button'   => "#^(.*)#i",
@@ -169,7 +171,7 @@ class FT_Proceed {
 									}
 								}
 
-								if ( ! isset( $file_name ) || empty( $file_name ) ) { 
+								if ( ! isset( $file_name ) || empty( $file_name ) ) {
 									$error_label[ $file['id'] ] = $error_msg[ $file['id'] ];
 									$is_valid = false;
 
@@ -259,7 +261,7 @@ class FT_Proceed {
 		endif;
 	}
 
-	/** 
+	/**
 	 * Seperate value
 	 * @param  str $value
 	 * @return value
@@ -274,7 +276,7 @@ class FT_Proceed {
 		return $value[0];
 	}
 
-	/** 
+	/**
 	 * Seperate label
 	 * @param  str $value
 	 * @return value
@@ -290,7 +292,7 @@ class FT_Proceed {
 		return $value;
 	}
 
-	/** 
+	/**
 	 * Send the form
 	 * @param  int $form_id Form ID
 	 * @return void
@@ -334,7 +336,7 @@ class FT_Proceed {
 
 				/**
 				 * To
-				 */	
+				 */
 				if ( isset( $options['dev_use'] ) && $options['dev_use'] == 'yes' ) {
 					$to = ft_get_value( $options['dev_email'], get_bloginfo( 'admin_email' ), 'email' );
 					$to = apply_filters( 'ft_to', $to[0] );
@@ -356,7 +358,7 @@ class FT_Proceed {
 						$headers[] = 'Cc: ' . $cc;
 					}
 				}
-				
+
 				/**
 				 * Object
 				 */
@@ -382,7 +384,7 @@ class FT_Proceed {
 
 				$from_email = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );
 				// $from_email = array( 'noreply@bravad.ca' );
-				
+
 				$from_email = apply_filters( 'ft_from_email', $from_email[0] );
 				$from_real  = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );
 
@@ -395,10 +397,14 @@ class FT_Proceed {
 				$fields = ft_get_fields( $form_id );
 				$keys   = array();
 
-				/** 
+				/**
 				 * Build the body
 				 */
 				foreach ( $fields as $field ) {
+					if ( $field['type'] == 'sep' ) {
+						$body .= '<hr style="border-bottom: 1px solid #eee; border-top: none;">';
+					}
+
 					if ( ! empty( $_FILES[ $field['id'] ] ) ) {
 						$file_count = count( $_FILES[ $field['id'] ]['name'] );
 
@@ -406,7 +412,7 @@ class FT_Proceed {
 							$file_path  = $upload['basedir'];
 							$file_path  = $file_path . '/formtastic_uploads/';
 							$file_name  = basename( sanitize_file_name( uniqid( 'ft_' ) . '-' . $_FILES[ $field['id'] ]['name'][ $i ] ) );
-							
+
 							$file_path .= $file_name;
 							$temp_path  = $_FILES[ $field['id'] ]['tmp_name'][ $i ];
 
@@ -446,7 +452,12 @@ class FT_Proceed {
 					if ( ! empty( $_POST[ $field['id'] ] ) ) {
 
 						if ( $field['type'] == 'checkbox' || $field['type'] == 'select' ) {
-							$value = wp_unslash( sanitize_text_field( implode( ', ', $_POST[ $field['id'] ] ) ) );
+							if ( is_array( $_POST[ $field['id'] ] ) ) {
+								$value = wp_unslash( sanitize_text_field( implode( ', ', $_POST[ $field['id'] ] ) ) );
+
+							} else {
+								$value = wp_unslash( sanitize_text_field( $_POST[ $field['id'] ] ) );
+							}
 
 						} else if ( $field['type'] == 'textarea' ) {
 							$value = wp_unslash( sanitize_textarea_field( $_POST[ $field['id'] ] ) );
@@ -472,7 +483,7 @@ class FT_Proceed {
 						} else {
 							$label = '';
 						}
-						
+
 						if ( $field['type'] == 'textarea' ) {
 							$body .=  '<p>' . $label . '</p><p>' . $value . '</p>';
 
@@ -512,7 +523,7 @@ class FT_Proceed {
 
 				if ( $confirm ) {
 					if ( is_email( $to ) && is_email( $from_email ) ) {
-						/** 
+						/**
 						 * Send email
 						 */
 						if ( isset( $settings['send_email'] ) && $settings['send_email'] == 'yes' ) {
@@ -520,10 +531,10 @@ class FT_Proceed {
 							do_action( 'ft_send', $form_id );
 
 							$mail = array(
-								'to'          => $to, 
-								'object'      => $object, 
-								'message'     => nl2br( $body ), 
-								'headers'     => $headers, 
+								'to'          => $to,
+								'object'      => $object,
+								'message'     => nl2br( $body ),
+								'headers'     => $headers,
 								'attachments' => '',
 								'id'          => $form_id,
 							);
@@ -531,15 +542,15 @@ class FT_Proceed {
 							self::email_template( $mail );
 						}
 
-						/** 
+						/**
 						 * Send copy
 						 */
 						if ( isset( $settings['send_copy'] ) && $settings['send_copy'] == 'yes' ) {
 							$mail = array(
-								'to'          => $from_email, 
-								'object'      => $object, 
-								'message'     => nl2br( $body ), 
-								'headers'     => $headers, 
+								'to'          => $from_email,
+								'object'      => $object,
+								'message'     => nl2br( $body ),
+								'headers'     => $headers,
 								'attachments' => '',
 								'id'          => $form_id,
 							);
@@ -567,7 +578,7 @@ class FT_Proceed {
 							}
 						}
 
-						/** 
+						/**
 						 * Save email to admin
 						 */
 						if ( isset( $settings['save_copy'] ) && $settings['save_copy'] == 'yes' ) {
@@ -592,7 +603,7 @@ class FT_Proceed {
 							self::save( $form_id, $form );
 						}
 
-						/** 
+						/**
 						 * Send auto reply
 						 */
 						if ( isset( $settings['send_reply'] ) && $settings['send_reply'] == 'yes' ) {
@@ -601,7 +612,7 @@ class FT_Proceed {
 
 						self::confirmation( true );
 
-						/** 
+						/**
 						 * Confirmation message/redirection
 						 */
 						if ( $settings['confirmation'] == 'page' && isset( $settings['page'] ) ) {
@@ -629,11 +640,11 @@ class FT_Proceed {
 					}
 				}
 			}
-		
+
 		endif;
 	}
 
-	/** 
+	/**
 	 * Resend the form
 	 * @param  array $mail Fields
 	 * @return void
@@ -659,7 +670,7 @@ class FT_Proceed {
 
 		/**
 		 * To
-		 */	
+		 */
 		if ( isset( $options['dev_use'] ) && $options['dev_use'] == 'yes' ) {
 			$to = ft_get_value( $options['dev_email'], get_bloginfo( 'admin_email' ), 'email' );
 			$to = apply_filters( 'ft_to', $to[0] );
@@ -681,7 +692,7 @@ class FT_Proceed {
 				$headers[] = 'Cc: ' . $cc;
 			}
 		}
-		
+
 		/**
 		 * Object
 		 */
@@ -714,7 +725,7 @@ class FT_Proceed {
 		} else {
 			$from_email = ft_get_value( $settings['from_email'], get_bloginfo( 'admin_email' ), 'email' );
 		}
-		
+
 		$from_email = apply_filters( 'ft_from_email', $from_email[0] );
 		// $from_email = get_post_meta( $response_id, 'ft_email', true );
 
@@ -733,12 +744,12 @@ class FT_Proceed {
 
 		$response = get_post( $response_id );
 		$body     = $response->post_content;
-		
+
 		$mail = array(
-			'to'          => $to, 
-			'object'      => $object, 
-			'message'     => nl2br( $body ), 
-			'headers'     => $headers, 
+			'to'          => $to,
+			'object'      => $object,
+			'message'     => nl2br( $body ),
+			'headers'     => $headers,
 			'attachments' => '',
 			'id'          => $form_id,
 		);
@@ -746,7 +757,7 @@ class FT_Proceed {
 		self::email_template( $mail );
 	}
 
-	/** 
+	/**
 	 * Email template
 	 * @param  array $mail Fields
 	 * @return void
@@ -759,14 +770,14 @@ class FT_Proceed {
 		echo $mail['message'];
 
 		include( 'views/html-email-footer.php' );
-			
+
 		$message = ob_get_contents();
 		ob_end_clean();
 
 		wp_mail( $mail['to'], $mail['object'], $message, $mail['headers'], $mail['attachments'] );
 	}
 
-	/** 
+	/**
 	 * Send auto reply
 	 * @param  int $form_id Form ID
 	 * @return void
@@ -843,10 +854,10 @@ class FT_Proceed {
 
 		if ( is_email( $reply_to ) && is_email( $reply_from_email ) ) {
 			$mail = array(
-				'to'          => $reply_to, 
-				'object'      => $reply_object, 
-				'message'     => nl2br( $body ), 
-				'headers'     => $headers, 
+				'to'          => $reply_to,
+				'object'      => $reply_object,
+				'message'     => nl2br( $body ),
+				'headers'     => $headers,
 				'attachments' => '',
 				'id'          => $form_id,
 			);
@@ -855,7 +866,7 @@ class FT_Proceed {
 		}
 	}
 
-	/** 
+	/**
 	 * Subscribe to Mailchimp
 	 * @param  int $form_id Form ID
 	 * @return void
@@ -961,7 +972,7 @@ class FT_Proceed {
 		}
 	}
 
-	/** 
+	/**
 	 * Save the form
 	 * @param  int $form_id Form ID
 	 * @param  array $form Form settings
@@ -988,7 +999,7 @@ class FT_Proceed {
 
 		if ( ! wp_verify_nonce( $_REQUEST[ $nonce ], 'formtastic_proceed' ) ) :
 			self::confirmation( false, __( 'Error, nonce is not valid', 'formtastic' ) );
-			
+
 		else :
 
 			if ( isset( $_POST['formtastic-' . $form_id] ) ) {
@@ -1015,11 +1026,11 @@ class FT_Proceed {
 
 				update_post_meta( $post_id, 'ft_array', $form['array'] );
 			}
-		
+
 		endif;
 	}
 
-	/** 
+	/**
 	 * Confirmation
 	 * @param  boolean $is_valid
 	 * @param  string $msg Message
@@ -1049,13 +1060,13 @@ class FT_Proceed {
 			$ft_confirm['status'] = false;
 			if ( empty( $msg ) ) {
 				$ft_confirm['message'] = ( ! empty( $settings['error_msg'] ) ) ? $settings['error_msg'] : __( 'An error has occurred, please check the field(s) again.', 'formtastic' );
-			
+
 			} else {
 				$ft_confirm['message'] = $msg;
 			}
 		}
 	}
-	
+
 }
 
 new FT_Proceed();

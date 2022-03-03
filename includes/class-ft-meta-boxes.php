@@ -37,71 +37,71 @@ class FT_Meta_boxes {
 	 */
 	public function register_meta_boxes() {
 		if ( post_type_exists( 'formtastic' ) ) {
-			add_meta_box( 
-				'formtastic_settings_meta_box', 
-				__( 'Settings', 'formtastic' ), 
+			add_meta_box(
+				'formtastic_settings_meta_box',
+				__( 'Settings', 'formtastic' ),
 				array( $this, 'build_formtastic_settings_meta_box' ),
 				'formtastic',
 				'normal',
-				'default' 
+				'default'
 			);
 
-			add_meta_box( 
-				'formtastic_fields_meta_box', 
-				__( 'Fields', 'formtastic' ), 
-				array( $this, 'build_formtastic_fields_meta_box' ), 
-				'formtastic', 
-				'side', 
-				'default' 
+			add_meta_box(
+				'formtastic_fields_meta_box',
+				__( 'Fields', 'formtastic' ),
+				array( $this, 'build_formtastic_fields_meta_box' ),
+				'formtastic',
+				'side',
+				'default'
 			);
 
-			add_meta_box( 
-				'formtastic_shortcode_meta_box', 
-				__( 'Shortcode', 'formtastic' ), 
-				array( $this, 'build_formtastic_shortcode_meta_box' ), 
-				'formtastic', 
-				'side', 
-				'default' 
+			add_meta_box(
+				'formtastic_shortcode_meta_box',
+				__( 'Shortcode', 'formtastic' ),
+				array( $this, 'build_formtastic_shortcode_meta_box' ),
+				'formtastic',
+				'side',
+				'default'
 			);
 
 			if ( get_post_status( get_the_ID() ) == 'publish' ) {
-				add_meta_box( 
-					'formtastic_import_meta_box', 
-					__( 'Import', 'formtastic' ), 
-					array( $this, 'build_formtastic_import_meta_box' ), 
-					'formtastic', 
-					'side', 
-					'default' 
+				add_meta_box(
+					'formtastic_import_meta_box',
+					__( 'Import', 'formtastic' ),
+					array( $this, 'build_formtastic_import_meta_box' ),
+					'formtastic',
+					'side',
+					'default'
 				);
 			}
 
-			add_meta_box( 
-				'formtastic_builder_meta_box', 
-				__( 'Form builder', 'formtastic' ), 
-				array( $this, 'build_formtastic_builder_meta_box' ), 
-				'formtastic', 
-				'normal', 
-				'default' 
+			add_meta_box(
+				'formtastic_builder_meta_box',
+				__( 'Form builder', 'formtastic' ),
+				array( $this, 'build_formtastic_builder_meta_box' ),
+				'formtastic',
+				'normal',
+				'default'
 			);
 		}
 
 		if ( post_type_exists( 'ft_response' ) ) {
-			add_meta_box( 
-				'ft_response_meta_box', 
-				__( 'Response', 'formtastic' ), 
-				array( $this, 'build_ft_response_meta_box' ), 
-				'ft_response', 
-				'normal', 
-				'default' 
+			add_meta_box(
+				'ft_response_meta_box',
+				__( 'Response', 'formtastic' ),
+				array( $this, 'build_ft_response_meta_box' ),
+				'ft_response',
+				'normal',
+				'default'
 			);
 
-			add_meta_box( 
-				'ft_response_info_meta_box', 
-				__( 'Information', 'formtastic' ), 
-				array( $this, 'build_ft_response_info_meta_box' ), 
-				'ft_response', 
-				'side', 
-				'default' 
+			add_meta_box(
+				'ft_response_info_meta_box',
+				__( 'Information', 'formtastic' ),
+				array( $this, 'build_ft_response_info_meta_box' ),
+				'ft_response',
+				'side',
+				'default'
 			);
 		}
 	}
@@ -197,16 +197,16 @@ class FT_Meta_boxes {
 	/**
 	 * Ajax create field
 	 */
-	public function create_field() {		
+	public function create_field() {
 		$field_type = $_POST['field_type'];
 		$data       = isset( $_POST['field_data'] ) ? $_POST['field_data'] : '';
 		$field_id   = uniqid( 'ft_' );
 
 	    $field = ft_render_field( $field_type, $data, $field_id );
 
-        wp_send_json_success( 
-        	array( 
-				'html' => $field, 
+        wp_send_json_success(
+        	array(
+				'html' => $field,
 				'id'   => $field_id
         	)
         );
@@ -215,7 +215,7 @@ class FT_Meta_boxes {
 	/**
 	 * Ajax create value
 	 */
-	public function create_value() {	
+	public function create_value() {
 		$values     = isset( $_POST['values'] ) ? $_POST['values'] : '';
 		$conditions = isset( $_POST['conditions'] ) ? $_POST['conditions'] : '';
 		$selection  = isset( $_POST['selection'] ) ? $_POST['selection'] : '';
@@ -235,7 +235,7 @@ class FT_Meta_boxes {
 			}
 		}
 
-        wp_send_json_success( 
+        wp_send_json_success(
         	array(
 				'html' => $html
         	)
@@ -245,8 +245,8 @@ class FT_Meta_boxes {
 	public function render_value( $values, $conditions, $selection ) {
 		$html = '<div class="ft-values-field">';
 		$html .= sprintf( '<div class="ft-handle">%s</div>', ft_icon( 'sort' ) );
-		$html .= sprintf( '<div class="ft-cell"><input type="radio" value="%s" name="selection" class="ft-values ft-input"%s %s></div>', 
-			wp_unslash( $values ), 
+		$html .= sprintf( '<div class="ft-cell"><input type="radio" value="%s" name="selection" class="ft-values ft-input"%s %s></div>',
+			wp_unslash( $values ),
 			$selection == $values ? ' data-prev="true"' : '',
 			! empty( $values ) ? checked( $selection, $values, false ) : ''
 		);
@@ -259,7 +259,7 @@ class FT_Meta_boxes {
 		return $html;
 	}
 
-	/** 
+	/**
 	 * Remove meta boxes
 	 * @return void
 	 */

@@ -1,10 +1,10 @@
 (function($) {
     "use strict";
 
-        $( window ).on( 'load', function() {            
+        $( window ).on( 'load', function() {
             formtasticInit();
         });
-        
+
         function formtasticInit() {
             var curr_field;
 
@@ -39,7 +39,7 @@
                 }).on( 'change', function() {
                     from.datepicker( 'option', 'maxDate', getDate( this ) );
                 });
-            
+
             function getDate( element ) {
                 var date;
 
@@ -82,7 +82,7 @@
                     var field = ui.helper.attr( 'data-field' );
 
                     ui.helper.css( 'opacity', '0' );
-                    
+
                     if ( $( event.target ).is( '.ft-sortable-fieldset' ) && $( ui.item ).attr( 'data-field' ) == 'fieldset' ) {
                         ui.helper.remove();
 
@@ -91,7 +91,7 @@
                             type: 'POST',
                             dataType: 'json',
                             url: ft.ajax_url,
-                            data: { 
+                            data: {
                                 'action': 'ft_create_field',
                                 'field_type': field
                             },
@@ -102,7 +102,7 @@
                                     .closest( '.ft-field' )
                                     .find( '.ft-edit' )
                                     .trigger( 'click' );
-                                
+
                                 if ( field == 'fieldset' ) {
                                     $( '#' + data.data.id )
                                         .closest( '.ft-field' )
@@ -164,7 +164,7 @@
                         data.push({
                             name: 'fields',
                             value: fields
-                        });  
+                        });
                     }
 
                     fieldset.find( '> .ft-data' ).val( JSON.stringify( data ) );
@@ -188,7 +188,7 @@
                 } else {
                     $( '#ft-manual' ).find( 'input[type="radio"]' ).attr( 'data-prev', 'false' );
                     input.attr( 'data-prev', 'true' );
-                } 
+                }
             });
 
             $( document ).on( 'click', '.ft-trash', function() {
@@ -222,7 +222,7 @@
                     .find( '.ft-field' )
                     .hide()
                     .removeClass( 'ft-active' );
-                
+
                 controls = controls.split( ',' );
 
                 for ( var i = 0; i < controls.length; i++ ) {
@@ -286,7 +286,7 @@
                             type: 'POST',
                             dataType: 'json',
                             url: ft.ajax_url,
-                            data: { 
+                            data: {
                                 'action': 'ft_create_value',
                                 'values': values,
                                 'conditions': conditions,
@@ -349,7 +349,7 @@
                         type: 'POST',
                         dataType: 'json',
                         url: ft.ajax_url,
-                        data: { 
+                        data: {
                             'action': 'ft_create_field',
                             'field_data' : data,
                             'field_type': type
@@ -374,7 +374,7 @@
                     type: 'POST',
                     dataType: 'json',
                     url: ft.ajax_url,
-                    data: { 
+                    data: {
                         'action': 'ft_create_value'
                     },
                     success: function( data ) {
@@ -431,9 +431,9 @@
                 } else {
                     curr_field
                         .find( 'button' )
-                        .text( btn_label ); 
+                        .text( btn_label );
                 }
-                
+
                 curr_field
                     .find( '.ft-text' )
                     .text( text );

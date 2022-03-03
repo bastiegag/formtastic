@@ -1,10 +1,10 @@
 <?php
 /**
  * Form view: Fields
- * 
+ *
  * @author  Sébastien Gagné
  * @package Formtastic/Views
- * @version 2.6.6
+ * @version 2.7.7
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -34,6 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'color'    => __( 'Color', 'formtastic' ),
 			'file'     => __( 'File', 'formtastic' ),
 			'hidden'   => __( 'Hidden', 'formtastic' ),
+			'redo'     => __( 'Repeater', 'formtastic' ),
 			'row'      => __( 'Row', 'formtastic' ),
 			'message'  => __( 'Message', 'formtastic' ),
 			'button'   => __( 'Send button', 'formtastic' )
@@ -45,6 +46,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$key,
 				$key !== 'button' ? ft_icon( $key, false ) : ''
 			);
-		} 
+		}
 	?>
 </ul>

@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.6
+ * @version 2.7.7
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -66,7 +66,7 @@ class FT_Form {
 
 		if ( isset( $ft_confirm ) && isset( $settings['confirmation'] ) && isset( $_POST['formtastic'] ) && $_POST['formtastic'] == $form_id ) {
 			$form .= sprintf( '<div class="ft-confirmation %s">%s</div>',
-				( $ft_confirm['status'] ) ? 'ft-confirmation--success' : 'ft-confirmation--invalid',
+				( $ft_confirm['status'] ) ? 'ft-confirmation-success alert alert-success' : 'ft-confirmation-invalid alert alert-danger',
 				wp_kses( $ft_confirm['message'], $allowed_html )
 			);
 		}
@@ -195,7 +195,7 @@ class FT_Form {
 		$type = esc_attr( $field['type'] );
 		$id   = esc_attr( $field['id'] );
 
-		if ( ! empty( $field['label'] ) && $type !== 'hidden' ) {
+		if ( ! empty( $field['label'] ) && $type !== 'hidden' && $type !== 'redo' ) {
 			$label = sprintf( '<label for="%s">%s %s</label>',
 				$id,
 				apply_filters( 'ft_label', $field['label'], $id ),
@@ -249,19 +249,18 @@ class FT_Form {
 			$label = '';
 
 		} else {
-			$before = sprintf( '<div class="ft-field ft-field--%s%s%s%s%s" data-type="%1$s" data-id="%s">',
+			$before = sprintf( '<div class="ft-field ft-field--%s%s%s%s" data-type="%1$s" data-id="%s">',
 				$type,
 				! empty( $class ) ? ' ' . $class : '',
 				! empty( $options['class_col'] ) ? ' ' . $options['class_col'] : ' col-md col-md-',
 				$colsize,
-				! empty( $error_label[ $id ] ) ? ' ft-invalid' : '',
 				$id
 			);
 
 			$after = apply_filters( 'ft_submit', '', $id, $submit );
 			$after .= '</div>';
 
-			if ( $type == 'repeater' ) {
+			if ( $type == 'redo' ) {
 				$after .= sprintf( '</div><div class="ft-row%s">',
 					! empty( $options['class_row'] ) ? ' ' . esc_attr( $options['class_row'] ) : ' row'
 				);
@@ -289,11 +288,12 @@ class FT_Form {
 			case 'password' :
 			case 'search' :
 			case 'tel' :
-				$input = sprintf( '<input type="%s" value="%s" id="%s" name="%3$s" placeholder="%s" class="ft-input ft-input--%1$s form-control" data-msg="%s"%s%s>',
+				$input = sprintf( '<input type="%s" value="%s" id="%s" name="%3$s" placeholder="%s" class="ft-input ft-input--%1$s form-control%s" data-msg="%s"%s%s>',
 					$type,
 					isset( $_POST[ $id ] ) ? wp_unslash( esc_html( $_POST[ $id ] ) ) : apply_filters( 'ft_value', $value, $id ),
 					$id,
 					$placeholder,
+					! empty( $error_label[ $id ] ) ? ' ft-invalid is-invalid' : '',
 					$invalid,
 					$required,
 					$attr
@@ -301,9 +301,10 @@ class FT_Form {
 				break;
 
 			case 'file' :
-				$input = sprintf( '<input type="file" id="%s" name="%1$s[]" class="ft-input ft-input--file form-control" data-label="%s" data-msg="%s"%s%s>',
+				$input = sprintf( '<input type="file" id="%s" name="%1$s[]" class="ft-input ft-input--file form-control%s" data-label="%s" data-msg="%s"%s%s>',
 					$id,
 					$btn_label,
+					! empty( $error_label[ $id ] ) ? ' ft-invalid is-invalid' : '',
 					$invalid,
 					$multiple,
 					$required
@@ -319,21 +320,23 @@ class FT_Form {
 				);
 				break;
 
-			case 'repeater' :
-				$input = sprintf( '<input type="hidden" value="%s"%s id="%s" name="%3$s" class="ft-input form-control"><button type="button" class="ft-button ft-repeater button %s">%s</button>',
-					isset( $_POST[ $id ] ) ? wp_unslash( esc_html( $_POST[ $id ] ) ) : apply_filters( 'ft_value', $value, $id ),
-					! empty( $field['max'] ) ? ' data-max="' . esc_attr( $field['max'] ) . '"' : '',
+			case 'redo' :
+				$max = ! empty( $field['max'] ) && is_numeric( $field['max'] ) ? esc_attr( $field['max'] ) : '1';
+				$input = sprintf( '<input type="hidden" value="1" data-max="%s" id="%s" name="%3$s" class="ft-input form-control"><button type="button" class="ft-button ft-repeater button %s"%s>%s</button>',
+					$max,
 					$id,
 					$btn_class,
+					$max == 1 ? ' disabled="disabled"' : '',
 					$btn_label
 				);
 				break;
 
 			case 'date' :
-				$input = sprintf( '<input type="text" value="%s" id="%s" name="%2$s" placeholder="%s" class="ft-input ft-input--date form-control" data-min="%s" data-max="%s" data-format="%s" data-msg="%s"%s%s>',
+				$input = sprintf( '<input type="text" value="%s" id="%s" name="%2$s" placeholder="%s" class="ft-input ft-input--date form-control%s" data-min="%s" data-max="%s" data-format="%s" data-msg="%s"%s%s>',
 					isset( $_POST[ $id ] ) ? wp_unslash( esc_html( $_POST[ $id ] ) ) : apply_filters( 'ft_value', $value, $id ),
 					$id,
 					$placeholder,
+					! empty( $error_label[ $id ] ) ? ' ft-invalid is-invalid' : '',
 					! empty( $field['min'] ) ? esc_attr( $field['min'] ) : '',
 					! empty( $field['max'] ) ? esc_attr( $field['max'] ) : '',
 					$format,
@@ -349,11 +352,12 @@ class FT_Form {
 			case 'url' :
 			case 'address' :
 			case 'time' :
-				$input = sprintf( '<input type="text" value="%s" id="%s" name="%2$s" placeholder="%s" class="ft-input ft-input--%s form-control" data-msg="%s"%s%s>',
+				$input = sprintf( '<input type="text" value="%s" id="%s" name="%2$s" placeholder="%s" class="ft-input ft-input--%s form-control%s" data-msg="%s"%s%s>',
 					isset( $_POST[ $id ] ) ? wp_unslash( esc_html( $_POST[ $id ] ) ) : apply_filters( 'ft_value', $value, $id ),
 					$id,
 					$placeholder,
 					$type,
+					! empty( $error_label[ $id ] ) ? ' ft-invalid is-invalid' : '',
 					$invalid,
 					$required,
 					$attr
@@ -361,10 +365,11 @@ class FT_Form {
 				break;
 
 			case 'color' :
-				$input = sprintf( '<div class="ft-color-holder"><input type="text" value="%s" id="%s" name="%2$s" class="ft-input ft-input--%s form-control" data-msg="%s"%s%s><div class="ft-color"></div></div>',
+				$input = sprintf( '<div class="ft-color-holder"><input type="text" value="%s" id="%s" name="%2$s" class="ft-input ft-input--%s form-control%s" data-msg="%s"%s%s><div class="ft-color"></div></div>',
 					isset( $_POST[ $id ] ) ? wp_unslash( esc_html( $_POST[ $id ] ) ) : apply_filters( 'ft_value', $value, $id ),
 					$id,
 					$type,
+					! empty( $error_label[ $id ] ) ? ' ft-invalid is-invalid' : '',
 					$invalid,
 					$required,
 					$attr
@@ -380,13 +385,14 @@ class FT_Form {
 				break;
 
 			case 'number' :
-				$input = sprintf( '<input type="%s" value="%s" min="%s"%s step="%s" id="%s" name="%6$s" class="ft-input ft-input--number form-control" data-msg="%s"%s%s>',
+				$input = sprintf( '<input type="%s" value="%s" min="%s"%s step="%s" id="%s" name="%6$s" class="ft-input ft-input--number form-control%s" data-msg="%s"%s%s>',
 					$type,
 					isset( $_POST[ $id ] ) ? wp_unslash( esc_html( $_POST[ $id ] ) ) : apply_filters( 'ft_value', $value, $id ),
 					! empty( $field['min'] ) ? esc_attr( $field['min'] ) : '0',
 					! empty( $field['max'] ) ? ' max="' . esc_attr( $field['max'] ) . '"' : '',
 					! empty( $field['step'] ) ? esc_attr( $field['step'] ) : '1',
 					$id,
+					! empty( $error_label[ $id ] ) ? ' ft-invalid is-invalid' : '',
 					$invalid,
 					$required,
 					$attr
@@ -394,21 +400,23 @@ class FT_Form {
 				break;
 
 			case 'range' :
-				$input = sprintf( '<div data-value="%s" data-min="%s" data-max="%s" data-step="%s" data-input="%s" class="ft-range"></div><input class="ft-input ft-input--range" type="hidden" value="%1$s" id="%5$s" name="%5$s" min="%2$s" max="%3$s">',
+				$input = sprintf( '<div data-value="%s" data-min="%s" data-max="%s" data-step="%s" data-input="%s" class="ft-range"></div><input class="ft-input ft-input--range%s" type="hidden" value="%1$s" id="%5$s" name="%5$s" min="%2$s" max="%3$s">',
 					! empty( $value ) ? apply_filters( 'ft_value', $value, $id ) : '0',
 					! empty( $field['min'] ) ? esc_attr( $field['min'] ) : '0',
 					! empty( $field['max'] ) ? esc_attr( $field['max'] ) : '100',
 					! empty( $field['step'] ) ? esc_attr( $field['step'] ) : '1',
-					$id
+					$id,
+					! empty( $error_label[ $id ] ) ? ' ft-invalid is-invalid' : '',
 				);
 				break;
 
 			case 'textarea' :
 				$rows   = '';
-				$input = sprintf( '<textarea id="%s" name="%1$s" rows="%s" placeholder="%s" class="ft-textarea form-control" data-msg="%s"%s%s>%s</textarea>',
+				$input = sprintf( '<textarea id="%s" name="%1$s" rows="%s" placeholder="%s" class="ft-textarea form-control%s" data-msg="%s"%s%s>%s</textarea>',
 					$id,
 					! empty( $field['rows'] ) ? esc_attr( $field['rows'] ) : '3',
 					$placeholder,
+					! empty( $error_label[ $id ] ) ? ' ft-invalid is-invalid' : '',
 					$invalid,
 					$required,
 					$attr,
@@ -425,7 +433,15 @@ class FT_Form {
 				break;
 
 			case 'select' :
-				$input = '<select id="' . $id . '" name="' . $id . '[]"' . $multiple .' class="ft-select form-control" data-msg="' . $invalid . '"' . $required . $attr . '>';
+				// $input = '<select id="' . $id . '" name="' . $id . '[]"' . $multiple .' class="ft-select form-control" data-msg="' . $invalid . '"' . $required . $attr . '>';
+				$input = sprintf( '<select id="%s" name="%1$s[]"%s class="ft-select form-control%s" data-msg="%s"%s%s>',
+					$id,
+					$multiple,
+					! empty( $error_label[ $id ] ) ? ' ft-invalid is-invalid' : '',
+					$invalid,
+					$required,
+					$attr
+				);
 
 				if ( empty( $multiple ) && ! empty( $placeholder ) ) {
 					$input .= '<option value="">' . $placeholder . '</option>';
@@ -509,6 +525,7 @@ class FT_Form {
 
 				if ( ! empty( $values ) ) {
 					$input = sprintf( '<div id="%s">', $id );
+
 					foreach( $values as $key ) {
 						$status = '';
 						$checked = '';
@@ -534,7 +551,7 @@ class FT_Form {
 							$checked = 'checked="checked"';
 						}
 
-						$input .= sprintf( '<input id="%s-%s" name="%1$s" type="radio" value="%s" data-msg="%s"%s %s%s%s%s><label for="%1$s-%2$s" class="ft-radio">%s</label>',
+						$input .= sprintf( '<input id="%s-%s" name="%1$s" type="radio" value="%s" class="form-check-input" data-msg="%s"%s %s%s%s%s><label for="%1$s-%2$s" class="ft-radio form-check-label">%s</label>',
 							$id,
 							sanitize_title( $key['value'] ),
 							$key['value'],
@@ -547,6 +564,7 @@ class FT_Form {
 							$key['label']
 						);
 					}
+
 					$input .= '</div>';
 				}
 				break;
@@ -572,6 +590,7 @@ class FT_Form {
 
 				if ( ! empty( $values ) ) {
 					$input = sprintf( '<div id="%s" class="ft-input--checkbox"%s>', $id, ! empty( $field['max'] ) ? ' data-max="' . $field['max'] . '" data-chosen="0"' : '' );
+
 					foreach( $values as $key ) {
 						$status  = '';
 						$checked = '';
@@ -600,7 +619,7 @@ class FT_Form {
 							$checked = 'checked="checked"';
 						}
 
-						$input .= sprintf( '<input id="%s-%s" name="%1$s[]" type="checkbox" value="%s" data-msg="%s"%s %s%s%s%s><label for="%1$s-%2$s" class="ft-checkbox">%s</label>',
+						$input .= sprintf( '<input id="%s-%s" name="%1$s[]" type="checkbox" value="%s" class="form-check-input" data-msg="%s"%s %s%s%s%s><label for="%1$s-%2$s" class="ft-checkbox form-check-label">%s</label>',
 							$id,
 							sanitize_title( $key['value'] ),
 							$key['value'],
@@ -613,6 +632,7 @@ class FT_Form {
 							$key['label']
 						);
 					}
+
 					$input .= '</div>';
 				}
 				break;
@@ -623,7 +643,7 @@ class FT_Form {
 		}
 
 		if ( ! empty( $error_label[ $id ] ) )
-			$error = sprintf( '<span id="%s%s-error" class="ft-invalid">%s</span>',
+			$error = sprintf( '<span id="%s%s-error" class="ft-invalid invalid-feedback">%s</span>',
 				$id,
 				$type == 'checkbox' || $type == 'select' ? '[]' : '',
 				$error_label[ $id ]

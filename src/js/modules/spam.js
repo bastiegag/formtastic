@@ -23,7 +23,7 @@
                 type: 'POST',
                 dataType: 'json',
                 url: ft.ajax_url,
-                data: { 
+                data: {
                     'action': 'ft_spam',
                     'response_id': response_id
                 },
@@ -62,19 +62,19 @@
                 type: 'POST',
                 dataType: 'json',
                 url: ft.ajax_url,
-                data: { 
+                data: {
                     'action': 'ft_unspam',
                     'response_id': response_id
                 },
                 success: function( data ) {
-                    var tr    = me.closest( 'tr' )
+                    var tr    = me.closest( 'tr' ),
                         small = me.closest( 'small' );
-                    
+
                     me.remove();
 
                     if ( $( '#ft_response_info_meta_box' ).length ) {
                         small.append( '<a href="#" class="ft-spam" data-response="' + response_id + '">Marquer comme spam</a>' );
-                        
+
                     } else {
                         tr
                             .removeClass( 'ft-spammed ft-spamming' )

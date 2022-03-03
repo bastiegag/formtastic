@@ -39,7 +39,7 @@ class FT_Ajax {
 		}
 
 		$response_id = $_REQUEST['response_id'];
-		
+
 		update_post_meta( $response_id, 'ft_read', 'read' );
 
 		wp_send_json_success();

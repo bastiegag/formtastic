@@ -1,7 +1,7 @@
 (function($) {
     "use strict";
 
-        $( window ).on( 'load', function() {            
+        $( window ).on( 'load', function() {
             formtasticInit();
         });
 
@@ -53,14 +53,14 @@
 
             $( '.ft-validate' ).on( 'submit', function() {
                 var form = $( this );
-                
+
                 if ( ! form.valid() ) {
                     return false;
                 }
 
                 if ( typeof ft.use_captcha !== 'undefined' && ft.use_captcha == 'yes' && typeof ft.site_key !== 'undefined' && ft.site_key !== '' ) {
                     event.preventDefault();
-                    
+
                     grecaptcha.ready( function() {
                         grecaptcha.execute( ft.site_key, { action: 'formtastic' } ).then( function( token ) {
                             form.find( 'input[name="g-recaptcha-response"]' ).val( token );
@@ -75,12 +75,12 @@
                 $( this ).validate({
                     errorElement: 'span',
                     errorLabelContainer: '.ft-check',
-                    errorClass: 'ft-invalid',
-                    validClass: 'ft-success',
+                    errorClass: 'invalid-feedback',
+                    validClass: 'ft-success is-valid',
                     highlight: function( element, errorClass, validClass ) {
                         $( element )
-                            .closest( '.ft-field' )
-                            .addClass( errorClass )
+                            // .closest( '.ft-field' )
+                            .addClass( 'ft-invalid is-invalid' )
                             .removeClass( validClass );
 
                         if ( typeof pageScroll !== 'undefined' ) {
@@ -91,8 +91,8 @@
                     },
                     unhighlight: function( element, errorClass, validClass ) {
                         $( element )
-                            .closest( '.ft-field' )
-                            .removeClass( errorClass )
+                            // .closest( '.ft-field' )
+                            .removeClass( 'ft-invalid is-invalid' )
                             .addClass( validClass );
 
                         if ( typeof pageScroll !== 'undefined' ) {
@@ -151,7 +151,7 @@
                         dateFormat: format,
                         onSelect: function() {
                             var validator = $( this ).closest( 'form' ).validate();
-                            
+
                             validator.element( $( this ) );
                         },
                         minDate: min,
@@ -232,7 +232,7 @@
 
                 $( '.ft-input--color' ).on( 'click', function( event ) {
                     $( '.ft-input--color' ).iris( 'hide' );
-                    
+
                     $( this ).iris( 'show' );
                 });
             }
@@ -276,31 +276,64 @@
             }
 
             if ( $( '.ft-repeater' ).length ) {
+                $( '.ft-repeater' ).each( function() {
+                    var me     = $( this ).closest( '.ft-field--redo' );
+
+                    me.find( 'input' ).val( '1' );
+                });
+
                 $( '.ft-repeater' ).on( 'click', function() {
-                    var me     = $( this ).closest( '.ft-field--repeater' ),
+                    var me     = $( this ).closest( '.ft-field--redo' ),
                         number = me.find( 'input' ).val(),
                         id     = me.attr( 'id' ),
-                        clone  = me.closest( '.ft-row' ).find( '.ft-field' ).not( '.ft-field--repeater' ).not( '.ft-clone' ).clone();
+                        els    = [],
+                        clone  = me.closest( '.ft-row' ).find( '.ft-field' ).not( '.ft-field--redo' ).not( '.ft-clone' ).clone();
 
-                    number++;
+                    if ( parseInt( number ) < parseInt( me.find( 'input' ).attr( 'data-max' ) ) ) {
+                        number++;
 
-                    me.find( 'input' ).val( number );
+                        if ( parseInt( number ) == parseInt( me.find( 'input' ).attr( 'data-max' ) ) ) {
+                            $( this ).prop( 'disabled', true );
+                        }
 
-                    clone.each( function() {
-                        var id   = $( this ).attr( 'data-id' ),
-                            name = $( this ).attr( 'data-name' );
+                        me.find( 'input' ).val( number );
 
-                        $( this )
-                            .addClass( 'ft-clone' )
-                            .find( 'input' ).attr( 'id', id + '-clone-' + number ).end()
-                            .find( 'input' ).attr( 'name', id + '-clone-' + number ).end()
-                            .find( 'select' ).attr( 'id', id + '-clone-' + number ).end()
-                            .find( 'select' ).attr( 'name', id + '-clone-' + number );
+                        clone.each( function() {
+                            var id   = $( this ).attr( 'data-id' ),
+                                name = $( this ).attr( 'data-name' );
 
-                        $( this ).insertBefore( me );
-                    });
+                            $( this )
+                                .removeAttr( 'id' )
+                                .attr( 'data-clone', number )
+                                .addClass( 'ft-clone' )
+                                .find( 'input' ).attr( 'id', id + '-clone-' + number ).end()
+                                .find( 'input' ).attr( 'name', id + '-clone-' + number ).end()
+                                .find( 'select' ).attr( 'id', id + '-clone-' + number ).end()
+                                .find( 'select' ).attr( 'name', id + '-clone-' + number );
+
+                            $( this ).insertBefore( me );
+                        });
+
+                        me.closest( '.ft-row' )
+                            .find( '[data-clone=' + number + ']' )
+                            .wrapAll( '<div class="ft-clone-line col-12"><div class="row ft-row"></div><a href="#" class="ft-delete">&times;</a></div>' );
+                    }
                 });
             }
+
+            $( document ).on( 'click', '.ft-delete', function() {
+                var me = $( this ),
+                    number = me.closest( '.ft-row' ).find( '.ft-field--redo input' ).val();
+
+                number--;
+
+                me.closest( '.ft-row' ).find( '.ft-field--redo input' ).val( number );
+                me.closest( '.ft-row' ).find( '.ft-field--redo .ft-repeater' ).prop( 'disabled', false );
+
+                me.closest( '.ft-clone-line' ).remove();
+
+                return false;
+            });
 
             function disable_checkbox( holder ) {
                 holder.find( 'input' ).each( function() {
@@ -325,7 +358,7 @@
                 $( '.ft-autofill a' ).on( 'click', function() {
                     var form   = $( this ).closest( 'form' ),
                         fields = {};
-                        
+
                     form.find( '.ft-field' ).each( function() {
                         if ( ! $( this ).is( '.ft-field--submit' ) ) {
                             var type = $( this ).attr( 'data-type' ),
@@ -334,7 +367,7 @@
                             fields[name] = type;
                         }
                     });
-                    
+
                     $.each( fields, function( key, value ) {
                         switch ( value ) {
                             case 'name' :
@@ -374,7 +407,7 @@
                                 break;
 
                             case 'range' :
-                                var number = generateNumber( key ); 
+                                var number = generateNumber( key );
                                 $( '#' + key ).val( number ).parent().find( '.ft-range' ).slider( 'value', number );
                                 break;
 
@@ -529,7 +562,7 @@
                         } else {
                             ids = me.find( ':selected' ).attr( 'data-ft-target' );
                         }
-                        
+
                     } else {
                         ids = me.attr( 'data-ft-target' );
                     }
@@ -544,7 +577,7 @@
                         if ( me.is( '[type=checkbox]' ) ) {
                             if ( me.prop( 'checked' ) == false ) {
                                 hideTargets( ids );
-                                
+
                             } else {
                                 showTargets( ids );
                             }
@@ -681,7 +714,7 @@
             for( var i = 1; i <= paras; i++) {
                 var k = Math.floor( Math.random() * textArr.length );
 
-                custom += textArr[k];  
+                custom += textArr[k];
 
                 if ( i !== paras ) {
                     custom += '\n\n';

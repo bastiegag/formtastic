@@ -1,7 +1,7 @@
 <?php
 /**
  * Form view: Builder
- * 
+ *
  * @author  Sébastien Gagné
  * @package Formtastic/Views
  * @version 2.0.0
@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					echo ft_render_field( $type, $field, $field_id, $children );
 				}
 			}
-			
+
 		endif;
 	?>
 </div>

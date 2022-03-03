@@ -1,26 +1,17 @@
-// Plugins required
-var gulp  = require( 'gulp' ),
-	// CSS related
-	autoprefixer = require( 'gulp-autoprefixer' ),
-	minifycss    = require( 'gulp-uglifycss' ),
-	mmq          = require( 'gulp-merge-media-queries' ),
-	sass         = require( 'gulp-sass' ),
-
-	// JS related
-	concat = require( 'gulp-concat' ),
-	jshint = require( 'gulp-jshint' ),
-	uglify = require( 'gulp-uglify' ),
-	terser = require( 'gulp-terser' ),
-
-	// Others
-	util	  = require( 'gulp-util' ),
-	filter    = require( 'gulp-filter' ),
-	imagemin  = require( 'gulp-imagemin' ),
-	notify    = require( 'gulp-notify' ),
-	plumber   = require( 'gulp-plumber' ),
-	rename    = require( 'gulp-rename' ),
-	sequence  = require( 'gulp-sequence' ),
-	svgsprite = require( 'gulp-svg-sprite' );
+var autoprefixer = require( 'gulp-autoprefixer' ),
+	concat       = require( 'gulp-concat' ),
+	gulp         = require( 'gulp' ),
+	sass 		 = require( 'gulp-sass' )( require( 'sass' ) ),
+	cleancss 	 = require( 'gulp-clean-css' ),
+	imagemin     = require( 'gulp-imagemin' ),
+	jshint       = require( 'gulp-jshint' ),
+	notify       = require( 'gulp-notify' ),
+	plumber      = require( 'gulp-plumber' ),
+	rename       = require( 'gulp-rename' ),
+	sequence     = require( 'gulp-sequence' ),
+	sourcemaps   = require( 'gulp-sourcemaps' ),
+	svgsprite    = require( 'gulp-svg-sprite' ),
+	terser       = require( 'gulp-terser' );
 
 // Default Gulp task
 gulp.task( 'default', gulp.series( css, js_back, js_front, done => {
@@ -35,64 +26,91 @@ gulp.task( 'watch', gulp.series( css, js_back, js_front, function() {
 	// Scripts
 	gulp.watch( ['src/js/modules/*.js', 'src/js/formtastic-admin.js'], gulp.series( js_back ) );
 	gulp.watch( ['src/js/plugins/*.js', 'src/js/formtastic.js'], gulp.series( js_front ) );
-
-	// SVG
-    gulp.watch( 'src/svg/*.svg', function( event ) {
-		sequence( svg_sprite, img_min ) ( function( err ) {
-			if ( err ) console.log( err );
-		});
-    });
 }));
 
 // Styles task
+gulp.task( 'css', gulp.series( css, done => {
+	done();
+}));
+
 function css() {
-	return  gulp.src( 'src/scss/formtastic.scss' )
+	return  gulp.src( 'src/scss/formtastic.scss', { base: 'src' } )
 				.pipe( plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) }) )
+				.pipe( sourcemaps.init() )
 				.pipe( sass({
-					errLogToConsole: true,
-					outputStyle: 'expanded',
-					precision: 10
-				}) )
+					outputStyle: 'expanded'
+				}).on( 'error', sass.logError ) )
 				.pipe( autoprefixer({
 					cascade: false,
 					remove: false
 				}) )
-				.pipe( plumber.stop() )
-				.pipe( filter( '**/*.css' ) )
-				.pipe( mmq({
-					log: true
+				.pipe( concat( 'formtastic.css' ) )
+				.pipe( cleancss({
+					format: 'beautify',
+					level: 2
 				}) )
-				.pipe( rename( 'formtastic.css' ) )
+				.pipe( sourcemaps.write() )
 				.pipe( gulp.dest( 'assets/css' ) )
-				.pipe( rename({ suffix: '.min' }) )
-				.pipe( minifycss({ 
-					maxLineLen: 0,
-					uglyComments: true
+				.pipe( sourcemaps.init({
+					loadMaps: true
 				}) )
-				.pipe( gulp.dest( 'assets/css' ) );
+				.pipe( rename({
+					suffix: '.min'
+				}) )
+				.pipe( cleancss() )
+				.pipe( sourcemaps.write() )
+				.pipe( gulp.dest( 'assets/css' ) )
+				.pipe( plumber.stop() );
 }
 
 // Scripts task
+gulp.task( 'js-back', gulp.series( js_back, done => {
+	done();
+}));
+
 function js_back() {
 	return  gulp.src( ['src/js/modules/*.js', 'src/js/formtastic-admin.js'] )
-				.pipe( jshint() )
+				.pipe( sourcemaps.init() )
+				.pipe( jshint({
+					esnext: true
+				}) )
 				.pipe( jshint.reporter( 'default' ) )
 				.pipe( concat( 'formtastic-admin.js' ) )
+				.pipe( sourcemaps.write() )
+				.pipe( gulp.dest( 'assets/js' ) )
+				.pipe( terser() )
+				.pipe( rename({
+					suffix: '.min'
+				}) )
 				.pipe( gulp.dest( 'assets/js' ) );
 }
 
+gulp.task( 'js-front', gulp.series( js_front, done => {
+	done();
+}));
+
 function js_front() {
 	return  gulp.src( ['src/js/plugins/*.js', 'src/js/formtastic.js'] )
-				.pipe( jshint() )
+				.pipe( sourcemaps.init() )
+				.pipe( jshint({
+					esnext: true
+				}) )
 				.pipe( jshint.reporter( 'default' ) )
 				.pipe( concat( 'formtastic.js' ) )
+				.pipe( sourcemaps.write() )
 				.pipe( gulp.dest( 'assets/js' ) )
-				.on( 'error', function( err ) { 
-					util.log( util.colors.red( '[Error]' ), err.toString() ); 
-				} );
+				.pipe( terser() )
+				.pipe( rename({
+					suffix: '.min'
+				}) )
+				.pipe( gulp.dest( 'assets/js' ) );
 }
 
 // Images task
+gulp.task( 'img-min', gulp.series( img_min, done => {
+	done();
+}));
+
 function img_min() {
 	return  gulp.src( 'src/img/*' )
 				.pipe( imagemin() )
@@ -100,6 +118,10 @@ function img_min() {
 }
 
 // SVG task
+gulp.task( 'svg-sprite', gulp.series( svg_sprite, done => {
+	done();
+}));
+
 function svg_sprite() {
     return  gulp.src( 'src/svg/*.svg' )
                 .pipe( svgsprite({

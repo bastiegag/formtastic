@@ -35,7 +35,7 @@ class FT_Register {
 		$plugin_url = Formtastic::plugin_url();
 		$version    = Formtastic::version();
 		$options    = get_option( 'ft_general' );
-		
+
 		wp_enqueue_style( 'wp-color-picker' );
 
 		$vars = array(
@@ -74,7 +74,7 @@ class FT_Register {
 		wp_enqueue_style( 'formtastic', $plugin_url . 'assets/css/formtastic' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' ) . '.css', array(), $version );
 
 		wp_enqueue_media();
-		
+
 		wp_enqueue_style( 'thickbox' );
 		wp_enqueue_script( 'thickbox' );
 
@@ -84,17 +84,17 @@ class FT_Register {
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 		wp_register_style( 'jquery-ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css' );
 		wp_enqueue_style( 'jquery-ui' );
-		
+
 		$screen = get_current_screen();
-		
+
 		if ( $screen->post_type == 'formtastic' || $screen->post_type == 'ft_response' ) {
 			wp_deregister_script( 'media-upload' );
 
-			wp_enqueue_style( 'wp-color-picker' ); 
-			
+			wp_enqueue_style( 'wp-color-picker' );
+
 			wp_enqueue_script( 'jquery-ui-draggable' );
 			wp_enqueue_script( 'formtastic-admin-scripts', $plugin_url . 'assets/js/formtastic-admin.js', array( 'jquery', 'wp-color-picker' ), $version, true );
-			
+
 			$vars = array(
 				'ajax_url'   => admin_url( 'admin-ajax.php' ),
 				'lang_code'  => ft_language_code(),
@@ -105,7 +105,7 @@ class FT_Register {
 		}
 	}
 
-	/** 
+	/**
 	 * Register formtastic shortcode
 	 * @param  array $atts Shortcode attributes
 	 * @return void
@@ -132,7 +132,7 @@ class FT_Register {
 			return FT_Form::build( $id );
 		}
 	}
-	
+
 	/**
 	 * Toolbar links
 	 */
@@ -144,8 +144,8 @@ class FT_Register {
 					'title'  => __( 'Formtastic', 'formtastic' ),
 					'href'   => 'edit.php?post_type=formtastic',
 					'parent' => false,
-					'meta'   => array( 
-						'class' => 'formtastic' 
+					'meta'   => array(
+						'class' => 'formtastic'
 					)
 				),
 				array(
@@ -169,8 +169,8 @@ class FT_Register {
 					'title'  => __( 'Formtastic', 'formtastic' ),
 					'href'   => 'edit.php?post_type=ft_response',
 					'parent' => false,
-					'meta'   => array( 
-						'class' => 'formtastic' 
+					'meta'   => array(
+						'class' => 'formtastic'
 					)
 				)
 			);
@@ -179,11 +179,11 @@ class FT_Register {
 		if ( isset( $links ) ) {
 			foreach ( $links as $link ) {
 				$wp_admin_bar->add_node( $link );
-			}	
+			}
 		}
 	}
 
-	/** 
+	/**
 	 * Disable quick links
 	 * @param  array $actions Actions link
 	 * @return void
@@ -207,7 +207,7 @@ class FT_Register {
 
 	    return $actions;
 	}
-	
+
 }
 
 new FT_Register();

@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.3
+ * @version 2.7.7
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,7 +18,7 @@ if ( ! function_exists( 'ft_dump' ) ) {
 	function ft_dump( $var, $render = true ) {
 		ob_start();
 
-		var_dump( $var);          
+		var_dump( $var);
 		$result = ob_get_contents();
 
 		ob_end_clean();
@@ -33,7 +33,7 @@ if ( ! function_exists( 'ft_dump' ) ) {
 }
 
 if ( ! function_exists( 'ft_language_code' ) ) {
-	/** 
+	/**
 	 * Get language code
 	 * @return string Language code
 	 */
@@ -52,7 +52,7 @@ if ( ! function_exists( 'ft_language_code' ) ) {
 }
 
 if ( ! function_exists( 'ft_icon' ) ) {
-	/** 
+	/**
 	 * Display svg icon
 	 * @param  string $icon Icon name
 	 * @return string SVG Icon
@@ -70,7 +70,7 @@ if ( ! function_exists( 'ft_icon' ) ) {
 }
 
 if ( ! function_exists( 'ft_date' ) ) {
-	/** 
+	/**
 	 * Display formatted date depend on language
 	 * @param  string $date Date('j-n-Y')
 	 * @return string Formatted date
@@ -107,7 +107,7 @@ if ( ! function_exists( 'ft_date' ) ) {
 }
 
 if ( ! function_exists( 'ft_sanitize_field' ) ) {
-	/** 
+	/**
 	 * Sanitize field
 	 * @param  array $array
 	 * @return void
@@ -122,13 +122,13 @@ if ( ! function_exists( 'ft_sanitize_field' ) ) {
 	            $value = wp_kses_post( $value );
 	        }
 	    }
- 
+
 	    return $array;
 	}
 }
 
 if ( ! function_exists( 'ft_get_fields' ) ) {
-	/** 
+	/**
 	 * Get fields
 	 * @param  int $form_id Form ID
 	 * @return array Field array
@@ -137,6 +137,7 @@ if ( ! function_exists( 'ft_get_fields' ) ) {
 		$formtastic = get_post_meta( $form_id, 'formtastic', true );
 		$array      = $formtastic['fields'];
 		$fields     = array();
+		$repeat 	= array();
 
 		foreach ( $array as $key => $value ) {
 			$options = json_decode( $value );
@@ -144,6 +145,25 @@ if ( ! function_exists( 'ft_get_fields' ) ) {
 
 			foreach ( $options as $option ) {
 				$field[ $option->name ] = $option->value;
+			}
+
+			if ( $options[0]->value == 'redo' ) {
+				for ( $i = 2; $i <= $field['max']; $i++ ) {
+					$fields[] = array( 'id' => '', 'type' => 'sep' );
+					foreach ( $repeat as $r_field ) {
+						$r_field['id'] .= '-clone-' . $i;
+
+						if ( ! empty( $_POST[ $r_field['id'] ] ) ) {
+							$fields[] = $r_field;
+						}
+					}
+				}
+			}
+
+			$repeat[] = $field;
+
+			if ( $options[0]->value == 'row' ) {
+				$repeat = array();
 			}
 
 			$fields[] = $field;
@@ -154,16 +174,16 @@ if ( ! function_exists( 'ft_get_fields' ) ) {
 }
 
 if ( ! function_exists( 'ft_get_value' ) ) {
-	/** 
+	/**
 	 * Get value
 	 * @param  string $value Value $fallback
 	 * @return string
 	 */
 	function ft_get_value( $value, $fallback, $field = 'text' ) {
 		$output = array();
-		
+
 		if ( ! empty( $value ) ) {
-			$values = explode( ',', $value );	
+			$values = explode( ',', $value );
 
 			foreach ( $values as $value ) {
 				$value = trim( $value );
@@ -204,7 +224,7 @@ if ( ! function_exists( 'ft_get_value' ) ) {
 }
 
 if ( ! function_exists( 'ft_get_from_ip' ) ) {
-	/** 
+	/**
 	 * Get user IP
 	 * @return string values
 	 */
@@ -227,7 +247,7 @@ if ( ! function_exists( 'ft_get_from_ip' ) ) {
 }
 
 if ( ! function_exists( 'ft_get_form_meta' ) ) {
-	/** 
+	/**
 	 * Get form meta
 	 * @param  string $type Field type
 	 * @return string values
@@ -256,7 +276,7 @@ if ( ! function_exists( 'ft_get_form_meta' ) ) {
 }
 
 if ( ! function_exists( 'ft_is_dev' ) ) {
-	/** 
+	/**
 	 * Check if on dev
 	 * @return string boolean
 	 */
@@ -310,7 +330,7 @@ if ( ! function_exists( 'ft_is_dev' ) ) {
 }
 
 if ( ! function_exists( 'ft_field_name' ) ) {
-	/** 
+	/**
 	 * Field name
 	 * @param  string $type Field type
 	 * @return string Field name
@@ -332,7 +352,7 @@ if ( ! function_exists( 'ft_field_name' ) ) {
 			'postal'   => __( 'Postal code', 'formtastic' ),
 			'radio'    => __( 'Radio', 'formtastic' ),
 			'range'    => __( 'Range', 'formtastic' ),
-			'repeater' => __( 'Repeater', 'formtastic' ),
+			'redo'     => __( 'Repeater', 'formtastic' ),
 			'row'      => __( 'Row', 'formtastic' ),
 			'search'   => __( 'Search', 'formtastic' ),
 			'select'   => __( 'Select', 'formtastic' ),
@@ -348,7 +368,7 @@ if ( ! function_exists( 'ft_field_name' ) ) {
 }
 
 if ( ! function_exists( 'ft_render_field' ) ) {
-	/** 
+	/**
 	 * Render field
 	 * @param  string $type Field type
 	 * @param  array $data Field data
@@ -423,7 +443,7 @@ if ( ! function_exists( 'ft_render_field' ) ) {
 					$fields = $value->value;
 				}
 
-				if ( $value->name == 'repeat' ) {
+				if ( $value->name == 'redo' ) {
 					$repeat = $value->value;
 				}
 
@@ -437,7 +457,7 @@ if ( ! function_exists( 'ft_render_field' ) ) {
 		// 	$field_id,
 		// 	esc_attr( wp_json_encode( $arr_data, JSON_UNESCAPED_UNICODE ) )
 		// );
-		
+
 		$encoded   = wp_json_encode( $arr_data );
 		$unescaped = preg_replace_callback( '/(?<!\\\\)\\\\u(\w{4})/', function( $matches ) {
 			return html_entity_decode( '&#x' . $matches[1] . ';', ENT_COMPAT, 'UTF-8' );
@@ -577,8 +597,8 @@ if ( ! function_exists( 'ft_render_field' ) ) {
 				);
 				break;
 
-			case 'repeater' :
-				$controls = 'id,btn-label,btn-class,max,value,colsize';
+			case 'redo' :
+				$controls = 'id,label,btn-label,btn-class,max,colsize';
 				$field    = sprintf( '<button class="ft-display button button-primary">%s</button>',
 					isset( $btn_label ) ? $btn_label : ''
 				);
@@ -590,12 +610,12 @@ if ( ! function_exists( 'ft_render_field' ) ) {
 				break;
 		}
 
-		$opt = array( 
+		$opt = array(
 			'edit'  => __( 'Edit', 'formtastic' ),
 			'copy'  => __( 'Duplicate', 'formtastic' ),
 			'trash' => __( 'Remove', 'formtastic' )
 		);
-		
+
 		$options = '';
 		foreach ( $opt as $key => $value ) {
 			$options .= '<a href="#" title="' . $value . '" class="ft-' . $key . '">' . ft_icon( $key ) . '</a>';
