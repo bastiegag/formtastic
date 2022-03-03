@@ -3,7 +3,7 @@
  * Plugin Name: Formtastic
  * Plugin URI: http://formtastic.sebastiengagne.ca/
  * Description: Plugin to create forms easily, it's formtastic!
- * Version: 2.7.7
+ * Version: 2.7.8
  * Author: Sébastien Gagné
  * Author URI: http://sebastiengagne.ca/
  *
@@ -68,7 +68,7 @@ class Formtastic {
 	 * Plugin version
 	 */
 	public static function version() {
-	    return '2.7.7';
+	    return '2.7.8';
 	}
 
 	/**

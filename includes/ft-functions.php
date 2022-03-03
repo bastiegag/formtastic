@@ -4,7 +4,7 @@
  *
  * @author  Sébastien Gagné
  * @package Formtastic/Classes
- * @version 2.7.7
+ * @version 2.7.8
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -401,7 +401,7 @@ if ( ! function_exists( 'ft_render_field' ) ) {
 			);
 
 		} else {
-			$arr_data = json_decode( $data );
+			$arr_data = json_decode( wp_unslash( $data ) );
 			$label    = '';
 			$required = '';
 			$values   = array();
