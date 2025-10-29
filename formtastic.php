@@ -79,8 +79,7 @@ class Formtastic {
 			'host'     => 'smtp.sendgrid.net',
 			'port'     => '587',
 			'username' => 'apikey',
-			'password' => 'U0cubjNRdG1UZXhRdy1VVzBsT3g1XzlaUS5JMGlUb2RBZnFqXzAwelMyTzJxamFUaG5CTkxrNVduWThndmFqeHViam53'
-			// 'password' => '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'
+			'password' => ''
 		);
 
 	    return $arr[ $key ];
